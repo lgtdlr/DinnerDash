@@ -22,8 +22,8 @@ public class Handler {
 
     public Handler(){
 
-        height=(DEFAULTHEIGHT/2) +(DEFAULTHEIGHT/4)  ;
-        width =(DEFAULTWIDTH/3);
+        height= (DEFAULTHEIGHT/2) +(DEFAULTHEIGHT/4);
+        width = (DEFAULTWIDTH/2) +(DEFAULTWIDTH/4);
 
     }
 
