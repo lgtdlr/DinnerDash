@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Burger{
 
-    int x =0,y =0;
+    int x =0,y =0, width = 16, height = 6;
 
     public Item ingridients[];
     ArrayList<BufferedImage> sprite = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Burger{
     public void render(Graphics g){
         int counter = 1;
         for (BufferedImage ingridient:this.sprite){
-            g.drawImage(ingridient,x,y-(counter * 15),null);
+            g.drawImage(ingridient,x,y-(counter * 15),width,height,null);
         }
     }
 }

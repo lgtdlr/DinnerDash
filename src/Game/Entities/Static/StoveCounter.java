@@ -7,6 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class StoveCounter extends BaseCounter {
     public StoveCounter(int xPos, int yPos, Item[] items, Handler handler) {
-        super(Images.kitchenCounter[0], xPos, yPos,handler, items);
+        super(Images.kitchenCounter[0], xPos, yPos,96,102,handler, items);
     }
 }

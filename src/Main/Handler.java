@@ -1,5 +1,6 @@
 package Main;
 
+import Game.World.BaseWorld;
 import Input.KeyManager;
 import Input.MouseManager;
 
@@ -19,6 +20,9 @@ public class Handler {
     int width,height;
 
     private GameSetUp game;
+
+
+    private BaseWorld World;
 
     public Handler(){
 
@@ -49,6 +53,14 @@ public class Handler {
 
     public MouseManager getMouseManager(){
         return game.getMouseManager();
+    }
+
+    public BaseWorld getWorld() {
+        return World;
+    }
+
+    public void setWorld(BaseWorld world) {
+        World = world;
     }
 
 

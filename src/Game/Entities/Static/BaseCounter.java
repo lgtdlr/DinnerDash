@@ -8,8 +8,8 @@ public class BaseCounter extends BaseStaticEntity {
 
     Item items[];
 
-    public BaseCounter(BufferedImage sprite, int xPos, int yPos, Handler handler, Item items[]) {
-        super(sprite, xPos, yPos,handler);
+    public BaseCounter(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler, Item items[]) {
+        super(sprite, xPos, yPos,width, height, handler);
         this.items=items;
     }
 
