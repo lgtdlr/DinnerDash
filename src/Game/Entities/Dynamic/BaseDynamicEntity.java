@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class BaseDynamicEntity extends BaseEntity {
 
-    public BaseDynamicEntity(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler) {
+    BaseDynamicEntity(BufferedImage sprite, int xPos, int yPos, int width, int height, Handler handler) {
         super(sprite, xPos, yPos,width,height, handler);
     }
 }

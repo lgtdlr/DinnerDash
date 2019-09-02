@@ -1,7 +1,6 @@
 package Game.GameStates;
 
 import Game.Entities.Static.*;
-import Game.World.BaseWorld;
 import Game.World.Restaurant_1;
 import Main.Handler;
 import java.awt.*;

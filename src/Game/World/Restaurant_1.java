@@ -6,7 +6,6 @@ import Main.Handler;
 import Resources.Images;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Restaurant_1 extends BaseWorld {
 
