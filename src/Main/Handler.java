@@ -1,5 +1,6 @@
 package Main;
 
+import Game.Entities.Dynamic.Player;
 import Game.World.BaseWorld;
 import Input.KeyManager;
 import Input.MouseManager;
@@ -23,6 +24,10 @@ public class Handler {
 
 
     private BaseWorld World;
+
+
+
+    private Player player;
 
     public Handler(){
 
@@ -63,5 +68,12 @@ public class Handler {
         World = world;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
 }

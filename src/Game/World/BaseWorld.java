@@ -1,6 +1,7 @@
 package Game.World;
 
 import Game.Entities.Dynamic.Client;
+import Game.Entities.Dynamic.Player;
 import Game.Entities.Static.BaseCounter;
 import Main.Handler;
 
@@ -18,11 +19,12 @@ public class BaseWorld {
 
     public ArrayList<Client> clients = new ArrayList<>();
 
-    public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler){
+    public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler, Player player){
         this.Background = Background;
         this.Counters = Counters;
         this.handler=handler;
         handler.setWorld(this);
+        handler.setPlayer(player);
     }
 
     public Client generateClient(){

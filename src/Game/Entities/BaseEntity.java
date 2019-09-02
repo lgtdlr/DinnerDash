@@ -8,7 +8,7 @@ public class BaseEntity {
 
     public BufferedImage sprite;
     public int xPos,yPos,width,height;
-    private Handler handler;
+    public Handler handler;
 
     public BaseEntity(BufferedImage sprite,int xPos, int yPos,int width,int height,Handler handler){
         this.sprite = sprite;
