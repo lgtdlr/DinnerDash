@@ -4,11 +4,11 @@ import java.awt.image.BufferedImage;
 
 public class Item {
 
+    public BufferedImage sprite;
 
-    public BufferedImage getALettuceSprite(){
-        return null;
+    public Item(BufferedImage sprite){
+        this.sprite = sprite;
     }
-
 }
 
 

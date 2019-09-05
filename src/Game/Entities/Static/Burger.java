@@ -6,13 +6,19 @@ import java.util.ArrayList;
 
 public class Burger{
 
-    int x =0,y =0, width = 16, height = 6;
-
-    public Item ingridients[];
+    int x, y, width,height;
+    Burger(int x, int y, int width, int height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    ArrayList<Item> ingredients = new ArrayList<>();
     ArrayList<BufferedImage> sprite = new ArrayList<>();
 
-    public void addIngridient(BufferedImage sprite){
-        this.sprite.add(sprite);
+    public void addIngredient(Item ingredient){
+        this.ingredients.add(ingredient);
+        this.sprite.add(ingredient.sprite);
     }
     public void finishBurger(){
         this.sprite.add(null);
@@ -20,8 +26,9 @@ public class Burger{
 
     public void render(Graphics g){
         int counter = 1;
-        for (BufferedImage ingridient:this.sprite){
-            g.drawImage(ingridient,x,y-(counter * 15),width,height,null);
+        for (BufferedImage ingredient:this.sprite){
+            g.drawImage(ingredient,x,y-(counter * 5),width,height,null);
+            counter++;
         }
     }
 }

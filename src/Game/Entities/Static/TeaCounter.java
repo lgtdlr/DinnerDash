@@ -5,8 +5,8 @@ import Resources.Images;
 
 public class TeaCounter extends BaseCounter {
 
-    public TeaCounter(int xPos, int yPos, Item[] items, Handler handler) {
-        super(Images.kitchenCounter[2], xPos, yPos,96,116,handler, items);
+    public TeaCounter(int xPos, int yPos, Handler handler) {
+        super(Images.kitchenCounter[2], xPos, yPos,96,116,handler);
     }
 
 }
