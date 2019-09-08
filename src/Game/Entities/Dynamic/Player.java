@@ -4,6 +4,7 @@ import Game.Entities.Static.BaseCounter;
 import Game.Entities.Static.Burger;
 import Game.Entities.Static.Item;
 import Main.Handler;
+import Resources.Images;
 
 
 import java.awt.*;
@@ -31,33 +32,17 @@ public class Player extends BaseDynamicEntity {
         } else{
             xPos-=speed;
         }
-//        if(handler.getKeyManager().right){
-//            direction = "right";
-//            speed++;
-//        }
-//        if(handler.getKeyManager().left){
-//            direction="left";
-//            speed++;
-//        }
-//        if(handler.getKeyManager().up){
-//            yPos-=2;
-//        }
-//        if(handler.getKeyManager().down){
-//            yPos+=2;
-//        }
         if (interactionCounter > 15 && handler.getKeyManager().attbut){
             interact();
             interactionCounter = 0;
         } else {
             interactionCounter++;
         }
-//        burger.setX(xPos + width/2 - 20);
-//        burger.setY(yPos+height/4);
     }
 
     public void render(Graphics g) {
+        g.drawImage(Images.player, xPos, yPos, width, height, null);
         g.setColor(Color.green);
-        g.drawRect(xPos,yPos,width,height);
         burger.render(g);
     }
 
