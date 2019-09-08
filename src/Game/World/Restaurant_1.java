@@ -43,6 +43,7 @@ public class Restaurant_1 extends BaseWorld {
             }
             this.generateClient();
         }else if(count == 5*60 && isFull()){
+            count=0;
             ArrayList<Client> toMove = new ArrayList<>();
             for (Client client : this.clients) {
                 if (client.isLeaving) {

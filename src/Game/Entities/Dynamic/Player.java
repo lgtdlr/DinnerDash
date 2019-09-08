@@ -1,9 +1,6 @@
 package Game.Entities.Dynamic;
 
-import Game.Entities.Static.BaseCounter;
-import Game.Entities.Static.BreadCounter;
-import Game.Entities.Static.EmptyCounter;
-import Game.Entities.Static.Item;
+import Game.Entities.Static.*;
 import Main.Handler;
 
 
@@ -14,21 +11,22 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
+    int speed = 5;
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
     }
     public void tick(){
         if(handler.getKeyManager().right){
-            xPos+=2;
+            xPos+=speed;
         }
         if(handler.getKeyManager().left){
-            xPos-=2;
+            xPos-=speed;
         }
         if(handler.getKeyManager().up){
-            yPos-=2;
+            yPos-=speed;
         }
         if(handler.getKeyManager().down){
-            yPos+=2;
+            yPos+=speed;
         }
         if(handler.getKeyManager().attbut){
             interact();
@@ -46,6 +44,27 @@ public class Player extends BaseDynamicEntity {
     }
 
     private void ringCustomer() {
+        if(handler.getCurrentBurger().ingredients.size()<=1){
+            return;
+        }
+        for(Client client: handler.getWorld().clients){
+            boolean matched =true;
+            for(int i =0 ;i<((Burger)client.order.food).ingredients.size();i++){
+                if(!((Burger)client.order.food).ingredients.get(i).sprite.equals(handler.getCurrentBurger().ingredients.get(i+1).sprite) ){
+                    matched=false;
+                    System.out.println("Didnt Match");
+                    break;
+                }
+
+            }
+            if(matched){
+                money+=client.order.value;
+                handler.getWorld().clients.remove(client);
+                handler.getEmptyCounter().createNewBurger();
+                return;
+            }
+
+        }
     }
 
     public void render(Graphics g) {

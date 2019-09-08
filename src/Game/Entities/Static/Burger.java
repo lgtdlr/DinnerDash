@@ -8,6 +8,10 @@ import java.util.Random;
 public class Burger extends Food{
 
     public int x, y, width,height;
+    public ArrayList<Item> ingredients = new ArrayList<>();
+    ArrayList<BufferedImage> sprite = new ArrayList<>();
+
+
     public Burger(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
@@ -15,8 +19,7 @@ public class Burger extends Food{
         this.height = height;
 
     }
-    ArrayList<Item> ingredients = new ArrayList<>();
-    ArrayList<BufferedImage> sprite = new ArrayList<>();
+
 
     public void addIngredient(Item ingredient){
         this.ingredients.add(ingredient);

@@ -1,6 +1,9 @@
 package Main;
 
 import Game.Entities.Dynamic.Player;
+import Game.Entities.Static.BaseCounter;
+import Game.Entities.Static.Burger;
+import Game.Entities.Static.EmptyCounter;
 import Game.World.BaseWorld;
 import Input.KeyManager;
 import Input.MouseManager;
@@ -74,6 +77,19 @@ public class Handler {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public EmptyCounter getEmptyCounter(){
+        for (BaseCounter counter: getWorld().Counters){
+            if(counter instanceof EmptyCounter){
+                return (EmptyCounter) counter;
+            }
+        }
+        return null;
+    }
+
+    public Burger getCurrentBurger(){
+        return getEmptyCounter().burger;
     }
 
 }
