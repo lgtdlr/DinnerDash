@@ -10,10 +10,21 @@ import java.awt.image.BufferedImage;
 
 public class Player extends BaseDynamicEntity {
     Item item;
+    String direction = "right";
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
     }
     public void tick(){
+        if(xPos + width >= handler.getWidth()){
+            direction = "left";
+        } else if(xPos == 0){
+            direction = "right";
+        }
+        if (direction.equals("right")){
+            xPos+=5;
+        } else{
+            xPos-=5;
+        }
         if(handler.getKeyManager().right){
             xPos+=2;
         }
