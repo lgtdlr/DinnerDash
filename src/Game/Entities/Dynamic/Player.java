@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.Static.BaseCounter;
+import Game.Entities.Static.Burger;
 import Game.Entities.Static.Item;
 import Main.Handler;
 
@@ -9,45 +10,55 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends BaseDynamicEntity {
-    Item item;
-    String direction = "right";
+    private Burger burger;
+    private String direction = "right";
+    private int interactionCounter = 0;
+    private int speed = 10;
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
+        burger = new Burger(handler.getWidth() - 110, 100, 100, 50);
     }
     public void tick(){
         if(xPos + width >= handler.getWidth()){
             direction = "left";
-        } else if(xPos == 0){
+            speed = 10;
+        } else if(xPos <= 0){
             direction = "right";
+            speed = 10;
         }
         if (direction.equals("right")){
-            xPos+=5;
+            xPos+=speed;
         } else{
-            xPos-=5;
+            xPos-=speed;
         }
-        if(handler.getKeyManager().right){
-            xPos+=2;
-        }
-        if(handler.getKeyManager().left){
-            xPos-=2;
-        }
-        if(handler.getKeyManager().up){
-            yPos-=2;
-        }
-        if(handler.getKeyManager().down){
-            yPos+=2;
-        }
-        if(handler.getKeyManager().attbut){
+//        if(handler.getKeyManager().right){
+//            direction = "right";
+//            speed++;
+//        }
+//        if(handler.getKeyManager().left){
+//            direction="left";
+//            speed++;
+//        }
+//        if(handler.getKeyManager().up){
+//            yPos-=2;
+//        }
+//        if(handler.getKeyManager().down){
+//            yPos+=2;
+//        }
+        if (interactionCounter > 15 && handler.getKeyManager().attbut){
             interact();
+            interactionCounter = 0;
+        } else {
+            interactionCounter++;
         }
+//        burger.setX(xPos + width/2 - 20);
+//        burger.setY(yPos+height/4);
     }
 
     public void render(Graphics g) {
         g.setColor(Color.green);
         g.drawRect(xPos,yPos,width,height);
-        if(item != null){
-            g.drawImage(item.sprite,xPos + width/2 - 25,yPos -30,50,30,null);
-        }
+        burger.render(g);
     }
 
     public void interact(){
@@ -57,12 +68,7 @@ public class Player extends BaseDynamicEntity {
             }
         }
     }
-
-    public void setItem(Item item){
-        this.item = item;
-    }
-
-    public Item getItem(){
-        return item;
+    public Burger getBurger(){
+        return this.burger;
     }
 }
