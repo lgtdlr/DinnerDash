@@ -40,6 +40,12 @@ public class Player extends BaseDynamicEntity {
                 }
             }
         }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
+            ringCustomer();
+        }
+    }
+
+    private void ringCustomer() {
     }
 
     public void render(Graphics g) {
