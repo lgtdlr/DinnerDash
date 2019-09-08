@@ -21,7 +21,8 @@ public class GameState extends State {
                 new LettuceCounter(788,600,handler),
                 new EmptyCounter(884,600,handler),
                 new TomatoCounter(980, 590, handler),
-                new BreadCounter(1076, 568, handler)};
+                new BreadCounter(1076, 568, handler),
+                new TopBreadCounter(1172, 568, handler)};
         Restaurant_1 World_1 = new Restaurant_1(Counters,handler);
 
     }

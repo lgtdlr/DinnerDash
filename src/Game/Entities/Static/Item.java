@@ -1,5 +1,7 @@
 package Game.Entities.Static;
 
+import Resources.Images;
+
 import java.awt.image.BufferedImage;
 
 public class Item {
@@ -9,6 +11,13 @@ public class Item {
     public Item(BufferedImage sprite){
         this.sprite = sprite;
     }
+
+    public static Item cheese = new Item(Images.ingredients[2]);
+    public static Item lettuce = new Item(Images.ingredients[4]);
+    public static Item tomato = new Item(Images.ingredients[3]);
+    public static Item burger = new Item(Images.ingredients[1]);
+    public static Item botBread = new Item(Images.ingredients[5]);
+    public static Item topBread = new Item(Images.ingredients[0]);
 }
 
 

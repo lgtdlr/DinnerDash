@@ -3,15 +3,17 @@ package Game.Entities.Static;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Burger{
+public class Burger extends Food{
 
-    int x, y, width,height;
-    Burger(int x, int y, int width, int height){
+    public int x, y, width,height;
+    public Burger(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+
     }
     ArrayList<Item> ingredients = new ArrayList<>();
     ArrayList<BufferedImage> sprite = new ArrayList<>();

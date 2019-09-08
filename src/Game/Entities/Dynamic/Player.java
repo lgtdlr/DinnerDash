@@ -1,15 +1,19 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.Static.BaseCounter;
+import Game.Entities.Static.BreadCounter;
+import Game.Entities.Static.EmptyCounter;
 import Game.Entities.Static.Item;
 import Main.Handler;
 
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Player extends BaseDynamicEntity {
     Item item;
+    float money;
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
     }
@@ -29,11 +33,18 @@ public class Player extends BaseDynamicEntity {
         if(handler.getKeyManager().attbut){
             interact();
         }
+        if(handler.getKeyManager().fattbut){
+            for(BaseCounter counter: handler.getWorld().Counters){
+                if (counter instanceof EmptyCounter){
+                    ((EmptyCounter)counter).createNewBurger();
+                }
+            }
+        }
     }
 
     public void render(Graphics g) {
         g.setColor(Color.green);
-        g.drawRect(xPos,yPos,width,height);
+        g.fillRect(xPos,yPos,width,height);
         if(item != null){
             g.drawImage(item.sprite,xPos + width/2 - 25,yPos -30,50,30,null);
         }

@@ -8,4 +8,5 @@ public class CheeseCounter extends BaseCounter {
         super(Images.kitchenCounter[5], xPos, yPos,96,108,handler);
         item = new Item(Images.ingredients[2]);
     }
+
 }

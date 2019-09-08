@@ -6,10 +6,14 @@ import Resources.Images;
 import java.awt.*;
 
 public class EmptyCounter extends BaseCounter {
-    private Burger burger;
+    public Burger burger;
 
     public EmptyCounter(int xPos, int yPos, Handler handler) {
         super(Images.kitchenCounter[3], xPos, yPos,96,102,handler);
+        createNewBurger();
+    }
+
+    public void createNewBurger(){
         burger = new Burger(xPos + width/2 - 20, yPos+height/4, 40, 10);
     }
 
@@ -19,6 +23,7 @@ public class EmptyCounter extends BaseCounter {
             burger.addIngredient(handler.getPlayer().getItem());
             handler.getPlayer().setItem(null);
         }
+
     }
 
     @Override

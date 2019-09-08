@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class BaseCounter extends BaseStaticEntity {
 
-    Item item;
+    public Item item;
 
     BaseCounter(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler) {
         super(sprite, xPos, yPos,width, height, handler);
@@ -18,6 +18,7 @@ public class BaseCounter extends BaseStaticEntity {
     }
 
     public void interact(){
+
         handler.getPlayer().setItem(item);
     }
     public void tick(){
