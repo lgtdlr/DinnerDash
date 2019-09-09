@@ -15,15 +15,17 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         BaseCounter Counters[] = {
-                new PlateCounter(500,584,handler),
-                new CheeseCounter(596,593,handler),
-                new StoveCounter(692,600,handler),
-                new LettuceCounter(788,600,handler),
-                new EmptyCounter(884,600,handler),
-                new TomatoCounter(980, 590, handler),
-                new BreadCounter(1076, 568, handler),
-                new TopBreadCounter(1172, 568, handler)};
-        Restaurant_1 World_1 = new Restaurant_1(Counters,handler);
+
+                new PlateCounter(0,584,handler),
+                new CheeseCounter(BaseCounter.DEFAULTCOUNTERWIDTH,593,handler),
+                new StoveCounter(BaseCounter.DEFAULTCOUNTERWIDTH*2,600,handler),
+                new LettuceCounter(BaseCounter.DEFAULTCOUNTERWIDTH*3,600,handler),
+                new EmptyCounter(BaseCounter.DEFAULTCOUNTERWIDTH*4,600,handler),
+                new TomatoCounter(BaseCounter.DEFAULTCOUNTERWIDTH*5, 590, handler),
+                new BreadCounter(BaseCounter.DEFAULTCOUNTERWIDTH*6, 568, handler),
+                new TopBreadCounter(BaseCounter.DEFAULTCOUNTERWIDTH*7, 568, handler)};
+
+    Restaurant_1 World_1 = new Restaurant_1(Counters,handler);
 
     }
 

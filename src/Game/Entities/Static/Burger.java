@@ -32,8 +32,9 @@ public class Burger extends Food{
     public void render(Graphics g){
         int counter = 1;
         for (BufferedImage ingredient:this.sprite){
-            g.drawImage(ingredient,x,y-(counter * 5),width,height,null);
+            g.drawImage(ingredient,x,y-(counter * 10),width,height,null);
             counter++;
         }
     }
+
 }

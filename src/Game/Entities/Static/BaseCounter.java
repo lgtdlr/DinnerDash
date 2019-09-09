@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 public class BaseCounter extends BaseStaticEntity {
 
     public Item item;
+    public static int DEFAULTCOUNTERWIDTH = 96;
 
     BaseCounter(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler) {
         super(sprite, xPos, yPos,width, height, handler);
@@ -18,8 +19,9 @@ public class BaseCounter extends BaseStaticEntity {
     }
 
     public void interact(){
-
-        handler.getPlayer().setItem(item);
+        if (item != null) {
+            handler.getPlayer().getBurger().addIngredient(item);
+        }
     }
     public void tick(){
 

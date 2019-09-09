@@ -2,6 +2,7 @@ package Game.Entities.Dynamic;
 
 import Game.Entities.Static.*;
 import Main.Handler;
+import Resources.Images;
 
 
 import java.awt.*;
@@ -11,30 +12,43 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
-    int speed = 5;
+    int speed = 10;
+    private Burger burger;
+    private String direction = "right";
+    private int interactionCounter = 0;
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
+        createBurger();
     }
+
+    public void createBurger(){
+        burger = new Burger(handler.getWidth() - 110, 100, 100, 50);
+
+    }
+
     public void tick(){
-        if(handler.getKeyManager().right){
-            xPos+=speed;
+        if(xPos + width >= handler.getWidth()){
+            direction = "left";
+            speed = 10;
+        } else if(xPos <= 0){
+            direction = "right";
+            speed = 10;
         }
-        if(handler.getKeyManager().left){
+        if (direction.equals("right")){
+            xPos+=speed;
+        } else{
             xPos-=speed;
         }
-        if(handler.getKeyManager().up){
-            yPos-=speed;
-        }
-        if(handler.getKeyManager().down){
-            yPos+=speed;
-        }
-        if(handler.getKeyManager().attbut){
+        if (interactionCounter > 15 && handler.getKeyManager().attbut){
             interact();
+            interactionCounter = 0;
+        } else {
+            interactionCounter++;
         }
         if(handler.getKeyManager().fattbut){
             for(BaseCounter counter: handler.getWorld().Counters){
-                if (counter instanceof EmptyCounter){
-                    ((EmptyCounter)counter).createNewBurger();
+                if (counter instanceof EmptyCounter && counter.isInteractable()){
+                    createBurger();
                 }
             }
         }
@@ -68,11 +82,9 @@ public class Player extends BaseDynamicEntity {
     }
 
     public void render(Graphics g) {
+        g.drawImage(Images.player, xPos, yPos, width, height, null);
         g.setColor(Color.green);
-        g.fillRect(xPos,yPos,width,height);
-        if(item != null){
-            g.drawImage(item.sprite,xPos + width/2 - 25,yPos -30,50,30,null);
-        }
+        burger.render(g);
     }
 
     public void interact(){
@@ -82,12 +94,7 @@ public class Player extends BaseDynamicEntity {
             }
         }
     }
-
-    public void setItem(Item item){
-        this.item = item;
-    }
-
-    public Item getItem(){
-        return item;
+    public Burger getBurger(){
+        return this.burger;
     }
 }

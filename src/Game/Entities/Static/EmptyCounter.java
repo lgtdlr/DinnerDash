@@ -3,8 +3,6 @@ package Game.Entities.Static;
 import Main.Handler;
 import Resources.Images;
 
-import java.awt.*;
-
 public class EmptyCounter extends BaseCounter {
     public Burger burger;
 
@@ -18,17 +16,7 @@ public class EmptyCounter extends BaseCounter {
     }
 
     @Override
-    public void interact(){
-        if (handler.getPlayer().getItem()!= null) {
-            burger.addIngredient(handler.getPlayer().getItem());
-            handler.getPlayer().setItem(null);
-        }
+    public void interact() {
 
-    }
-
-    @Override
-    public void render(Graphics g){
-        g.drawImage(sprite,xPos,yPos,width,height,null);
-        burger.render(g);
     }
 }

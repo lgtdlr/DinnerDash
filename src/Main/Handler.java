@@ -35,7 +35,7 @@ public class Handler {
     public Handler(){
 
         height= (DEFAULTHEIGHT/2) +(DEFAULTHEIGHT/4);
-        width = (DEFAULTWIDTH/2) +(DEFAULTWIDTH/4);
+        width = BaseCounter.DEFAULTCOUNTERWIDTH*8;
 
     }
 
@@ -89,7 +89,7 @@ public class Handler {
     }
 
     public Burger getCurrentBurger(){
-        return getEmptyCounter().burger;
+        return getPlayer().getBurger();
     }
 
 }
