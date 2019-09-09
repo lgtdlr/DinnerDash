@@ -21,7 +21,7 @@ public class Client extends BaseDynamicEntity {
         OGpatience = patience;
         int numOfIngredients = new Random().nextInt(4)+1;
         order = new Order();
-        order.food = new Burger(xPos +72,yPos,32,42);
+        order.food = new Burger(xPos +72,yPos,52,22);
         ((Burger) order.food).addIngredient(Item.botBread);
         ((Burger) order.food).addIngredient(Item.burger);
         order.value += 1.0;
