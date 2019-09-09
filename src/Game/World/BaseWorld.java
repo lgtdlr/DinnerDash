@@ -28,7 +28,7 @@ public class BaseWorld {
     }
 
     public Client generateClient(){
-        Client client =  new Client(null,0,0,null);
+        Client client =  new Client(0,96,handler);
         this.clients.add(client);
         return client;
     }

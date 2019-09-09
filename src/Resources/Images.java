@@ -2,6 +2,7 @@ package Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -15,9 +16,9 @@ public class Images {
     public static BufferedImage title;
     public static BufferedImage floor;
     public static BufferedImage Pause;
-    public static BufferedImage player;
     public static BufferedImage[] Resume;
     public static BufferedImage[] people;
+    public static BufferedImage[] chef;
     public static BufferedImage[] kitchenChairTable;
     public static BufferedImage[] kitchenCounter;
     public static BufferedImage[] ingredients;
@@ -27,6 +28,7 @@ public class Images {
     public static SpriteSheet kitchenSpriteSheet;
     public static SpriteSheet kitchenCounterSpriteSheet;
     public static SpriteSheet burgerSpriteSheet;
+    public static SpriteSheet chefSpriteSheet;
     public Images() {
 
         butstart = new BufferedImage[3];
@@ -34,20 +36,21 @@ public class Images {
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
-        people = new BufferedImage[8];
+        people = new BufferedImage[9];
         kitchenCounter = new BufferedImage[8];
         ingredients = new BufferedImage[7];
+        chef = new BufferedImage[4];
         try {
 
             kitchenSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/sprite.png")));
             kitchenCounterSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/kitchen_cabinets_by_ayene_chan.png")));
             burgerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/burger.png")));
+            chefSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.png")));
 
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.jpg"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
             floor = ImageIO.read(getClass().getResourceAsStream("/Sheets/floor.jpg"));
-            player = ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.gif"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
@@ -83,14 +86,41 @@ public class Images {
             ingredients[5] = burgerSpriteSheet.crop(444, 270, 115, 39); // bottom bun
             ingredients[6] = burgerSpriteSheet.crop(575, 263, 131, 51); // plate
 
+            chef[0] = chefSpriteSheet.crop(30,3,66,120);
+            chef[1] = chefSpriteSheet.crop(159,3,66,120);
+            chef[2] = chefSpriteSheet.crop(287,3,67,120);
+            chef[3] = chefSpriteSheet.crop(31,129,66,120);
+
             icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/icon.png")));
 
 
         }catch (IOException e) {
-        e.printStackTrace();
+            e.printStackTrace();
+        }
     }
 
+    public static BufferedImage tint(BufferedImage src, float r, float g, float b) {
 
+        // Copy image ( who made that so complicated :< )
+        BufferedImage newImage = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TRANSLUCENT);
+        Graphics2D graphics = newImage.createGraphics();
+        graphics.drawImage(src, 0, 0, null);
+        graphics.dispose();
+
+        // Color image
+        for (int i = 0; i < newImage.getWidth(); i++) {
+            for (int j = 0; j < newImage.getHeight(); j++) {
+                int ax = newImage.getColorModel().getAlpha(newImage.getRaster().getDataElements(i, j, null));
+                int rx = newImage.getColorModel().getRed(newImage.getRaster().getDataElements(i, j, null));
+                int gx = newImage.getColorModel().getGreen(newImage.getRaster().getDataElements(i, j, null));
+                int bx = newImage.getColorModel().getBlue(newImage.getRaster().getDataElements(i, j, null));
+                rx *= r;
+                gx *= g;
+                bx *= b;
+                newImage.setRGB(i, j, (ax << 24) | (rx << 16) | (gx << 8) | (bx << 0));
+            }
+        }
+        return newImage;
     }
 
     public static BufferedImage loadImage(String path) {

@@ -4,6 +4,7 @@ import Game.Entities.Static.Burger;
 import Game.Entities.Static.Item;
 import Game.Entities.Static.Order;
 import Main.Handler;
+import Resources.Images;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,18 +15,18 @@ public class Client extends BaseDynamicEntity {
     int OGpatience;
     Order order;
     public boolean isLeaving = false;
-    public Client(BufferedImage sprite, int xPos, int yPos, Handler handler) {
-        super(sprite, xPos, yPos,64,72, handler);
+    public Client(int xPos, int yPos, Handler handler) {
+        super(Images.people[new Random().nextInt(9)], xPos, yPos,64,72, handler);
         patience = new Random().nextInt(120*60)+60*60;
         OGpatience = patience;
-        int numOfIngredients = new Random().nextInt(6)+1;
+        int numOfIngredients = new Random().nextInt(4)+1;
         order = new Order();
-        order.food = new Burger(xPos +64,yPos,32,42);
+        order.food = new Burger(xPos +72,yPos,32,42);
         ((Burger) order.food).addIngredient(Item.botBread);
         ((Burger) order.food).addIngredient(Item.burger);
         order.value += 1.0;
         for(int i = 0;i<numOfIngredients;i++){
-            int ingredients = new Random().nextInt(3)+1;
+            int ingredients = new Random().nextInt(4)+1;
             order.value += 0.5;
             switch (ingredients){
                 case 1:
@@ -41,6 +42,7 @@ public class Client extends BaseDynamicEntity {
                     ((Burger) order.food).addIngredient(Item.cheese);
 
                     break;
+
             }
 
         }
@@ -55,22 +57,16 @@ public class Client extends BaseDynamicEntity {
         }
     }
     public void render(Graphics g){
-        if(patience<=OGpatience/4) {
-            g.setColor(Color.red);
-        }
-        else if(patience<= (OGpatience/4)*3) {
-            g.setColor(Color.YELLOW);
-        }else{
-            g.setColor(Color.GREEN);
-        }
+
         if(!isLeaving){
-            g.fillRect(xPos,yPos,width,height);
+            g.drawImage(Images.tint(sprite,1.0f,((float)patience/(float)OGpatience),((float)patience/(float)OGpatience)),xPos,yPos,width,height,null);
+
             ((Burger) order.food).render(g);
         }
     }
 
     public void move(){
-        yPos+=92;
-        ((Burger) order.food).y+=92;
+        yPos+=102;
+        ((Burger) order.food).y+=102;
     }
 }

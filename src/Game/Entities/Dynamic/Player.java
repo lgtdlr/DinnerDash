@@ -2,6 +2,7 @@ package Game.Entities.Dynamic;
 
 import Game.Entities.Static.*;
 import Main.Handler;
+import Resources.Animation;
 import Resources.Images;
 
 
@@ -16,9 +17,11 @@ public class Player extends BaseDynamicEntity {
     private Burger burger;
     private String direction = "right";
     private int interactionCounter = 0;
+    private Animation playerAnim;
     public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
         super(sprite, xPos, yPos,82,112, handler);
         createBurger();
+        playerAnim = new Animation(120,Images.chef);
     }
 
     public void createBurger(){
@@ -27,6 +30,7 @@ public class Player extends BaseDynamicEntity {
     }
 
     public void tick(){
+        playerAnim.tick();
         if(xPos + width >= handler.getWidth()){
             direction = "left";
 
@@ -84,7 +88,12 @@ public class Player extends BaseDynamicEntity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(Images.player, xPos, yPos, width, height, null);
+        if(direction=="right") {
+            g.drawImage(playerAnim.getCurrentFrame(), xPos, yPos, width, height, null);
+        }else{
+            g.drawImage(playerAnim.getCurrentFrame(), xPos+width, yPos, -width, height, null);
+
+        }
         g.setColor(Color.green);
         burger.render(g);
     }

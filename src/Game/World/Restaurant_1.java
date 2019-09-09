@@ -73,11 +73,13 @@ public class Restaurant_1 extends BaseWorld {
     }
     public void render(Graphics g){
         g.drawImage(Background,0,0,handler.getWidth(), handler.getHeight(),null);
-        for(BaseCounter counter: Counters){
-            counter.render(g);
-        }
+
         for(Client client: clients){
             client.render(g);
+        }
+
+        for(BaseCounter counter: Counters){
+            counter.render(g);
         }
         handler.getPlayer().render(g);
     }
