@@ -9,7 +9,7 @@ public class Animation {
     private BufferedImage[] frames;
     public boolean end=false;
 
-    public Animation(int speed,BufferedImage[] frames) {
+    public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;
         this.frames = frames;
         index = 0;
@@ -17,7 +17,7 @@ public class Animation {
         lastTime = System.currentTimeMillis();
     }
 
-    public Animation(int speed,BufferedImage[] frames,int index){
+    public Animation(int speed, BufferedImage[] frames, int index){
         this.speed=speed;
         this.frames=frames;
         this.index=index;

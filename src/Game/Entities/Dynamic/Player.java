@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
-    int speed = 10;
+    int speed = 5;
     private Burger burger;
     private String direction = "right";
     private int interactionCounter = 0;
@@ -29,10 +29,9 @@ public class Player extends BaseDynamicEntity {
     public void tick(){
         if(xPos + width >= handler.getWidth()){
             direction = "left";
-            speed = 10;
+
         } else if(xPos <= 0){
             direction = "right";
-            speed = 10;
         }
         if (direction.equals("right")){
             xPos+=speed;
@@ -53,18 +52,20 @@ public class Player extends BaseDynamicEntity {
             }
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
-            ringCustomer();
+            for(BaseCounter counter: handler.getWorld().Counters) {
+                if (counter instanceof PlateCounter && counter.isInteractable()) {
+                    ringCustomer();
+                }
+            }
         }
     }
 
     private void ringCustomer() {
-        if(handler.getCurrentBurger().ingredients.size()<=1){
-            return;
-        }
+
         for(Client client: handler.getWorld().clients){
             boolean matched =true;
             for(int i =0 ;i<((Burger)client.order.food).ingredients.size();i++){
-                if(!((Burger)client.order.food).ingredients.get(i).sprite.equals(handler.getCurrentBurger().ingredients.get(i+1).sprite) ){
+                if(!((Burger)client.order.food).ingredients.get(i).sprite.equals(handler.getCurrentBurger().ingredients.get(i).sprite) ){
                     matched=false;
                     System.out.println("Didnt Match");
                     break;
@@ -74,7 +75,8 @@ public class Player extends BaseDynamicEntity {
             if(matched){
                 money+=client.order.value;
                 handler.getWorld().clients.remove(client);
-                handler.getEmptyCounter().createNewBurger();
+                handler.getPlayer().createBurger();
+                System.out.println("Total money earned is: " + String.valueOf(money));
                 return;
             }
 
