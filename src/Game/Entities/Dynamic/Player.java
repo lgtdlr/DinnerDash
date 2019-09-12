@@ -67,15 +67,7 @@ public class Player extends BaseDynamicEntity {
     private void ringCustomer() {
 
         for(Client client: handler.getWorld().clients){
-            boolean matched =true;
-            for(int i =0 ;i<((Burger)client.order.food).ingredients.size();i++){
-                if(!((Burger)client.order.food).ingredients.get(i).sprite.equals(handler.getCurrentBurger().ingredients.get(i).sprite) ){
-                    matched=false;
-                    System.out.println("Didnt Match");
-                    break;
-                }
-
-            }
+            boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
             if(matched){
                 money+=client.order.value;
                 handler.getWorld().clients.remove(client);

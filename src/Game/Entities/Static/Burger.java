@@ -37,4 +37,15 @@ public class Burger extends Food{
         }
     }
 
+    public boolean equals(Burger b){
+        if (b.ingredients.size() != ingredients.size()){
+            return false;
+        }
+        for(int i =0 ;i<ingredients.size();i++){
+            if(!ingredients.get(i).equals(b.ingredients.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
 }
