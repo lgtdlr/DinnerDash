@@ -88,6 +88,11 @@ public class Player extends BaseDynamicEntity {
         }
         g.setColor(Color.green);
         burger.render(g);
+        g.setColor(Color.green);
+        g.fillRect(handler.getWidth()/2 -210, 3, 320, 32);;
+        g.setColor(Color.yellow);
+        g.setFont(new Font("ComicSans", Font.BOLD, 32));
+        g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 30);
     }
 
     public void interact(){
