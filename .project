@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/Sheets/CoinblockTransparentSpriteSheet.png</name>
-			<type>1</type>
-			<location>C:/Users/jjvm9/Downloads/CoinblockTransparentSpriteSheet.png</location>
-		</link>
-		<link>
-			<name>res/Sheets/mountain.png</name>
-			<type>1</type>
-			<location>C:/Users/jjvm9/Downloads/mountain.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
