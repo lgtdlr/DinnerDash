@@ -21,6 +21,8 @@ public class Images {
     public static BufferedImage[] people;
     public static BufferedImage[] chef;
     public static BufferedImage[] kitchenChairTable;
+    public static BufferedImage chair;
+    public static BufferedImage table;
     public static BufferedImage[] kitchenCounter;
     public static BufferedImage[] ingredients;
     public static BufferedImage chum;
@@ -62,6 +64,8 @@ public class Images {
             kitchenChairTable[0] = kitchenSpriteSheet.crop(21,27,62,54);
             kitchenChairTable[1] = kitchenSpriteSheet.crop(108,14,30,35);
             kitchenChairTable[2] = kitchenSpriteSheet.crop(108,52,30,35);
+            chair = ImageIO.read(getClass().getResourceAsStream("/Sheets/chair.png"));
+            table = ImageIO.read(getClass().getResourceAsStream("/Sheets/table.png"));
 
             people[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Car_Designer3Female.png"));
             people[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Doctor2Female.png"));
