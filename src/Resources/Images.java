@@ -23,6 +23,7 @@ public class Images {
     public static BufferedImage[] kitchenChairTable;
     public static BufferedImage[] kitchenCounter;
     public static BufferedImage[] ingredients;
+    public static BufferedImage chum;
     public static BufferedImage[] BTitle;
     public static BufferedImage[] Options;
     public static ImageIcon icon;
@@ -38,14 +39,15 @@ public class Images {
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
         people = new BufferedImage[9];
-        kitchenCounter = new BufferedImage[8];
-        ingredients = new BufferedImage[7];
+        kitchenCounter = new BufferedImage[9];
+        ingredients = new BufferedImage[8];
         chef = new BufferedImage[4];
         try {
 
             kitchenSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/sprite.png")));
             kitchenCounterSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/kitchen_cabinets_by_ayene_chan.png")));
             burgerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/burger.png")));
+            chum = ImageIO.read(getClass().getResourceAsStream("/Sheets/chum.png"));
             chefSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.png")));
 
 
@@ -79,6 +81,7 @@ public class Images {
             kitchenCounter[5] = kitchenCounterSpriteSheet.crop(64,73,32,46);//cheese
             kitchenCounter[6] = kitchenCounterSpriteSheet.crop(0,133,32,50);//plates
             kitchenCounter[7] = kitchenCounterSpriteSheet.crop(0,63,34,56);//buns
+            kitchenCounter[8] = kitchenCounterSpriteSheet.crop(160, 12, 32, 43);//mortar
 
             ingredients[0] = burgerSpriteSheet.crop(25, 16, 112, 43); // top bun
             ingredients[1] = burgerSpriteSheet.crop(30, 134, 103, 48); // patty
@@ -87,6 +90,7 @@ public class Images {
             ingredients[4] = burgerSpriteSheet.crop(161, 62, 117, 34); // lettuce
             ingredients[5] = burgerSpriteSheet.crop(444, 270, 115, 39); // bottom bun
             ingredients[6] = burgerSpriteSheet.crop(575, 263, 131, 51); // plate
+            ingredients[7] = chum; //special ingredient
 
             chef[0] = chefSpriteSheet.crop(30,3,66,120);
             chef[1] = chefSpriteSheet.crop(159,3,66,120);

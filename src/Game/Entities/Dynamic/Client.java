@@ -20,10 +20,18 @@ public class Client extends BaseDynamicEntity {
         patience = new Random().nextInt(120*60)+60*60;
         OGpatience = patience;
         int numOfIngredients = new Random().nextInt(4)+1;
+        int chumOrMeat = new Random().nextInt(2);
         order = new Order();
         order.food = new Burger(xPos +72,yPos,52,22);
         ((Burger) order.food).addIngredient(Item.botBread);
-        ((Burger) order.food).addIngredient(Item.burger);
+        if (chumOrMeat == 1) {
+        	((Burger) order.food).addIngredient(Item.burger);
+        	chumOrMeat = new Random().nextInt(1);
+        }
+        else {
+        	((Burger) order.food).addIngredient(Item.chum);
+        	chumOrMeat = new Random().nextInt(1);
+        }
         order.value += 1.0;
         for(int i = 0;i<numOfIngredients;i++){
             int ingredients = new Random().nextInt(4)+1;
