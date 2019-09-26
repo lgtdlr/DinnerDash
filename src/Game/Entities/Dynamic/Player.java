@@ -69,7 +69,10 @@ public class Player extends BaseDynamicEntity {
         for(Client client: handler.getWorld().clients){
             boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
             if(matched){
-                money+=client.order.value;
+            	//Tip of 15% if client is served before patience reaches half
+            	if (client.OGpatience/2 > client.patience)
+            		 money+=client.order.value*(1+0.15);
+            	else money+=client.order.value;
                 handler.getWorld().clients.remove(client);
                 handler.getPlayer().createBurger();
                 System.out.println("Total money earned is: " + String.valueOf(money));
