@@ -13,7 +13,8 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
-    int speed = 5;
+    int speed = 7;
+    int BaseSpeed=speed;//Used to get base move speed back
     private Burger burger;
     private String direction = "right";
     private int interactionCounter = 0;
@@ -48,6 +49,14 @@ public class Player extends BaseDynamicEntity {
         } else {
             interactionCounter++;
         }
+        
+        //Pressing shift to make the player move slower
+        if (handler.getKeyManager().shiftButt) {
+        	speed=2;
+        } else {
+        	speed=BaseSpeed;
+        }
+        
         if(handler.getKeyManager().fattbut){
             for(BaseCounter counter: handler.getWorld().Counters){
                 if (counter instanceof PlateCounter && counter.isInteractable()){

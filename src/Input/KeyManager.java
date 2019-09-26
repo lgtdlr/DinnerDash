@@ -48,7 +48,7 @@ public class KeyManager implements KeyListener {
 		attbut = keys[KeyEvent.VK_E];
 		fattbut = keys[KeyEvent.VK_C];
 		pbutt = keys[KeyEvent.VK_ESCAPE];
-		pbutt = keys[KeyEvent.VK_SHIFT];
+		shiftButt = keys[KeyEvent.VK_SHIFT];
 
 	}
 
