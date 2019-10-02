@@ -17,9 +17,9 @@ public class BaseWorld {
 
     public Handler handler;
 
-    public ArrayList<Client> clients = new ArrayList<>();
+    public ArrayList<Client> clients = new ArrayList<>(); 
 
-    public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler, Player player){
+	public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler, Player player){
         this.Background = Background;
         this.Counters = Counters;
         this.handler=handler;
