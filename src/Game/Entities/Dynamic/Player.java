@@ -82,6 +82,10 @@ public class Player extends BaseDynamicEntity {
             	if (client.OGpatience/2 > client.patience)
             		 money+=client.order.value*(1+0.15);
             	else money+=client.order.value;
+            	//Increase every client's patience when order is given exactly right
+            	for (Client clients: handler.getWorld().clients) {
+            		clients.patience += clients.OGpatience/4.0;
+            	}
                 handler.getWorld().clients.remove(client);
                 handler.getPlayer().createBurger();
                 System.out.println("Total money earned is: " + String.valueOf(money));
