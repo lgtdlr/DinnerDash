@@ -20,6 +20,7 @@ public class Item {
     public static Item botBread = new Item(Images.ingredients[5], "bottomBun");
     public static Item topBread = new Item(Images.ingredients[0], "topBun");
     public static Item chum = new Item(Images.ingredients[7], "chum");
+    //public static Item secretFormula = new Item(Images.ingredients[8], "secretRecipe");
 
     public boolean equals(Item i) {
         return i.name.equals(name);

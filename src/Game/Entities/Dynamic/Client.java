@@ -11,14 +11,14 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Client extends BaseDynamicEntity {
-    int patience;
-    int OGpatience;
+    private int patience;
+    private int OGpatience;
     Order order;
     public boolean isLeaving = false;
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(9)], xPos, yPos,64,72, handler);
-        patience = new Random().nextInt(120*60)+60*60;
-        OGpatience = patience;
+        setPatience(new Random().nextInt(120*60)+60*60);
+        setOGpatience(getPatience());
         int numOfIngredients = new Random().nextInt(4)+1;
         int chumOrMeat = new Random().nextInt(2);
         order = new Order();
@@ -59,15 +59,15 @@ public class Client extends BaseDynamicEntity {
     }
 
     public void tick(){
-        patience--;
-        if(patience<=0){
+        setPatience(getPatience() - 1);
+        if(getPatience()<=0){
             isLeaving=true;
         }
     }
     public void render(Graphics g){
 
         if(!isLeaving){
-            g.drawImage(Images.tint(sprite,1.0f,((float)patience/(float)OGpatience),((float)patience/(float)OGpatience)),xPos,yPos,width,height,null);
+            g.drawImage(Images.tint(sprite,1.0f,((float)getPatience()/(float)getOGpatience()),((float)getPatience()/(float)getOGpatience())),xPos,yPos,width,height,null);
 
             ((Burger) order.food).render(g);
         }
@@ -77,4 +77,20 @@ public class Client extends BaseDynamicEntity {
         yPos+=102;
         ((Burger) order.food).y+=102;
     }
+
+	public int getPatience() {
+		return patience;
+	}
+
+	public void setPatience(int patience) {
+		this.patience = patience;
+	}
+
+	public int getOGpatience() {
+		return OGpatience;
+	}
+
+	public void setOGpatience(int oGpatience) {
+		OGpatience = oGpatience;
+	}
 }

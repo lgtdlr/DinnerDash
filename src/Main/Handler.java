@@ -3,7 +3,7 @@ package Main;
 import Game.Entities.Dynamic.Player;
 import Game.Entities.Static.BaseCounter;
 import Game.Entities.Static.Burger;
-import Game.Entities.Static.ChumCounter;
+import Game.Entities.Static.BonusCounter;
 import Game.World.BaseWorld;
 import Input.KeyManager;
 import Input.MouseManager;
@@ -35,7 +35,7 @@ public class Handler {
     public Handler(){
 
         height= (DEFAULTHEIGHT/2) +(DEFAULTHEIGHT/4);
-        width = BaseCounter.DEFAULTCOUNTERWIDTH*8;
+        width = BaseCounter.DEFAULTCOUNTERWIDTH*9;
 
     }
 
@@ -79,10 +79,10 @@ public class Handler {
         this.player = player;
     }
 
-    public ChumCounter getEmptyCounter(){
+    public BonusCounter getBonusCounter(){
         for (BaseCounter counter: getWorld().Counters){
-            if(counter instanceof ChumCounter){
-                return (ChumCounter) counter;
+            if(counter instanceof BonusCounter){
+                return (BonusCounter) counter;
             }
         }
         return null;

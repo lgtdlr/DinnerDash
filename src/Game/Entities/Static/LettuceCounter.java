@@ -5,7 +5,7 @@ import Resources.Images;
 
 public class LettuceCounter extends BaseCounter {
     public LettuceCounter(int xPos, int yPos, Handler handler) {
-        super(Images.kitchenCounter[1], xPos, yPos,96,102,handler);
+        super(Images.kitchenCounter[1], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),102,handler);
         item = Item.lettuce;
     }
 }

@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class PlateCounter extends BaseCounter {
     public PlateCounter(int xPos, int yPos, Handler handler) {
-        super(Images.kitchenCounter[6], xPos, yPos,96,117,handler);
+        super(Images.kitchenCounter[6], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),117,handler);
     }
 
     @Override

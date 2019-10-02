@@ -5,12 +5,18 @@ import Main.Handler;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import Game.Entities.Dynamic.Client;
+
 public class BaseCounter extends BaseStaticEntity {
 
     public Item item;
     public static int DEFAULTCOUNTERWIDTH = 96;
 
-    BaseCounter(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler) {
+	public static int getCOUNTERWIDTH() {
+		return DEFAULTCOUNTERWIDTH;
+	}
+
+	BaseCounter(BufferedImage sprite, int xPos, int yPos,int width,int height, Handler handler) {
         super(sprite, xPos, yPos,width, height, handler);
     }
 
@@ -21,6 +27,13 @@ public class BaseCounter extends BaseStaticEntity {
     public void interact(){
         if (item != null) {
             handler.getPlayer().getBurger().addIngredient(item);
+        } else if (handler.getBonusCounter().activated) {
+        	for (Client clients: handler.getWorld().clients) {
+				clients.setPatience(clients.getOGpatience());
+			}
+        	handler.getBonusCounter().activated=false;
+        	handler.getBonusCounter().counter=0;
+        	handler.getBonusCounter().activationCounter=0;
         }
     }
     public void tick(){

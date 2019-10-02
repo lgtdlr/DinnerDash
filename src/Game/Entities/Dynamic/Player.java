@@ -96,12 +96,12 @@ public class Player extends BaseDynamicEntity {
 
 		if(matched){
 			//Tip of 15% if client is served before patience reaches half
-			if (handler.getWorld().clients.get(selectClient-1).OGpatience/2 > handler.getWorld().clients.get(selectClient-1).patience)
+			if (handler.getWorld().clients.get(selectClient-1).getOGpatience()/2 > handler.getWorld().clients.get(selectClient-1).getPatience())
 				money+=handler.getWorld().clients.get(selectClient-1).order.value*(1+0.15);
 			else money+=handler.getWorld().clients.get(selectClient-1).order.value;
 			//Increase every client's patience when order is given exactly right
 			for (Client clients: handler.getWorld().clients) {
-				clients.patience += clients.OGpatience/4.0;
+				clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
 			}
 			handler.getWorld().clients.remove(handler.getWorld().clients.get(selectClient-1));
 			handler.getPlayer().createBurger();
@@ -125,6 +125,7 @@ public class Player extends BaseDynamicEntity {
 		g.setFont(new Font("ComicSans", Font.BOLD, 32));
 		g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 30);
 		
+		//Visual indication of which client is selected
 		switch (selectClient) {
 		case 1:
 			g.drawRect(1, 96, 64-4, 64+8);

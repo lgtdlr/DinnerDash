@@ -14,7 +14,7 @@ public class StoveCounter extends BaseCounter {
     boolean burnt = false;
     float tint = 1;
     public StoveCounter(int xPos, int yPos, Handler handler) {
-        super(Images.kitchenCounter[0], xPos, yPos,96,102,handler);
+        super(Images.kitchenCounter[0], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),102,handler);
         item = Item.burger;
     }
 

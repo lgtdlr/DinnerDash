@@ -23,7 +23,8 @@ public class GameState extends State {
                 new ChumCounter(BaseCounter.DEFAULTCOUNTERWIDTH*4,600,handler),
                 new TomatoCounter(BaseCounter.DEFAULTCOUNTERWIDTH*5, 590, handler),
                 new BreadCounter(BaseCounter.DEFAULTCOUNTERWIDTH*6, 568, handler),
-                new TopBreadCounter(BaseCounter.DEFAULTCOUNTERWIDTH*7, 568, handler)};
+                new TopBreadCounter(BaseCounter.DEFAULTCOUNTERWIDTH*7, 568, handler),
+                new BonusCounter(BaseCounter.DEFAULTCOUNTERWIDTH*8, 599, handler)};
 
     Restaurant_1 World_1 = new Restaurant_1(Counters,handler);
 
