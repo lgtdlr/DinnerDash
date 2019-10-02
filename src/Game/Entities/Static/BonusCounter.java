@@ -24,7 +24,6 @@ public class BonusCounter extends BaseCounter {
     	do {
 			activationThreshold = new Random().nextInt(9999);
 		} while (activationThreshold<1000);
-    	System.out.println(counter);
     	
         if(counter >= activationThreshold){
         	
@@ -33,7 +32,6 @@ public class BonusCounter extends BaseCounter {
         		doOnce++;
         	}
         	activated = true;
-        	System.out.println(activationCounter);
         	if (counter-activationCounter >= 120 || !activated) {
         		counter = 0;
         		activationCounter = 0;

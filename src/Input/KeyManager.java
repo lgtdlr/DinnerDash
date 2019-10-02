@@ -16,6 +16,7 @@ public class KeyManager implements KeyListener {
 	public boolean fattbut=false;
 	public boolean pbutt=false;
 	public boolean shiftButt=false;
+	public boolean orderbutt=false;
 	public boolean selOne=false, selTwo=false, selThree=false, selFour=false, selFive=false;
 
 
@@ -48,14 +49,10 @@ public class KeyManager implements KeyListener {
 
 		attbut = keys[KeyEvent.VK_E];
 		fattbut = keys[KeyEvent.VK_C];
+		orderbutt = keys[KeyEvent.VK_R];
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		shiftButt = keys[KeyEvent.VK_SHIFT];
-		
-		selOne = keys[KeyEvent.VK_1];
-		selTwo = keys[KeyEvent.VK_2];
-		selThree = keys[KeyEvent.VK_3];
-		selFour = keys[KeyEvent.VK_4];
-		selFive = keys[KeyEvent.VK_5];
+
 
 	}
 
