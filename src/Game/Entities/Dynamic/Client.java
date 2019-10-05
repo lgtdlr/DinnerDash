@@ -77,6 +77,11 @@ public class Client extends BaseDynamicEntity {
         yPos+=102;
         ((Burger) order.food).y+=102;
     }
+    
+    public void moveBackwards() {
+    	yPos-=102;
+    	((Burger) order.food).y-=102;
+    }
 
 	public int getPatience() {
 		return patience;

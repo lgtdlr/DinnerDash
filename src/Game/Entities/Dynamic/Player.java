@@ -22,7 +22,7 @@ public class Player extends BaseDynamicEntity {
 	private Burger burger;
 	private String direction = "right";
 	private int interactionCounter = 0;
-	private int selectClient = 1;
+	private int selectClient = 0;
 	private Animation playerAnim;
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
 		super(sprite, xPos, yPos,82,112, handler);
@@ -70,25 +70,25 @@ public class Player extends BaseDynamicEntity {
 			}
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)) {
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)&&handler.getWorld().clients.size()>0) {
+			selectClient = 0;
+			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
+		}
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_2)&&handler.getWorld().clients.size()>1) {
 			selectClient = 1;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient-1).order.food).equals(handler.getCurrentBurger());
-		}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_2)) {
-			selectClient = 2;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient-1).order.food).equals(handler.getCurrentBurger());
+			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 			}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_3)) {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_3)&&handler.getWorld().clients.size()>2) {
+			selectClient = 2;
+			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
+		}
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_4)&&handler.getWorld().clients.size()>3) {
 			selectClient = 3;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient-1).order.food).equals(handler.getCurrentBurger());
+			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_4)) {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_5)&&handler.getWorld().clients.size()>4) {
 			selectClient = 4;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient-1).order.food).equals(handler.getCurrentBurger());
-		}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_5)) {
-			selectClient = 5;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient-1).order.food).equals(handler.getCurrentBurger());
+			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
 			
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
@@ -104,20 +104,27 @@ public class Player extends BaseDynamicEntity {
 
 	private void ringCustomer() {
 		
-
 		if(matched){
 			//Tip of 15% if client is served before patience reaches half
-			if (handler.getWorld().clients.get(selectClient-1).getOGpatience()/2 > handler.getWorld().clients.get(selectClient-1).getPatience())
-				money+=handler.getWorld().clients.get(selectClient-1).order.value*(1+0.15);
-			else money+=handler.getWorld().clients.get(selectClient-1).order.value;
+			if (handler.getWorld().clients.get(selectClient).getOGpatience()/2 > handler.getWorld().clients.get(selectClient).getPatience())
+				money+=handler.getWorld().clients.get(selectClient).order.value*(1+0.15);
+			else money+=handler.getWorld().clients.get(selectClient).order.value;
 			//Increase every client's patience when order is given exactly right
 			for (Client clients: handler.getWorld().clients) {
 				clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
 			}
-			handler.getWorld().clients.remove(handler.getWorld().clients.get(selectClient-1));
+			
+			//Moves all clients after the served client backwards
+			if (selectClient>0) {
+				for (int i = selectClient-1; i <= 0; i++) {
+				handler.getWorld().clients.get(i).moveBackwards();
+				}
+			}
+			handler.getWorld().clients.remove(selectClient);
 			handler.getPlayer().createBurger();
+			matched = false;
 			System.out.println("Total money earned is: " + String.valueOf(money));
-			selectClient = 1;
+			selectClient = 0;
 			return;
 		}
 	}
@@ -139,19 +146,19 @@ public class Player extends BaseDynamicEntity {
 		
 		//Visual indication of which client is selected
 		switch (selectClient) {
-		case 5:
+		case 4:
 			g.drawRect(1, 96, 64-4, 64+8);
 			break;
-		case 4:
+		case 3:
 			g.drawRect(1, 96*2+4, 64-4, 64+8);
 			break;
-		case 3:
+		case 2:
 			g.drawRect(1, 96*3+8, 64-4, 64+8);
 			break;
-		case 2:
+		case 1:
 			g.drawRect(1, 96*4+12, 64-4, 64+8);
 			break;
-		case 1:
+		case 0:
 			g.drawRect(1, 96*5+16, 64-4, 64+8);
 			break;
 		default:
