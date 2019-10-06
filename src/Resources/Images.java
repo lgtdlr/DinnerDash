@@ -17,7 +17,10 @@ public class Images {
     public static BufferedImage floor;
     public static BufferedImage welcome;
     public static BufferedImage Pause;
+    public static BufferedImage Win;
+    public static BufferedImage Lose;
     public static BufferedImage[] Resume;
+    public static BufferedImage[] Restart;
     public static BufferedImage[] people;
     public static BufferedImage[] chef;
     public static BufferedImage[] kitchenChairTable;
@@ -37,6 +40,7 @@ public class Images {
 
         butstart = new BufferedImage[3];
         Resume = new BufferedImage[2];
+        Restart = new BufferedImage[2];
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
@@ -55,12 +59,20 @@ public class Images {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.jpg"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
+            Win = ImageIO.read(getClass().getResourceAsStream("/Sheets/Win.jpg"));
+            Lose = ImageIO.read(getClass().getResourceAsStream("/Sheets/Lose.jpg"));
             welcome = ImageIO.read(getClass().getResourceAsStream("/Sheets/Welcome.png"));
             floor = ImageIO.read(getClass().getResourceAsStream("/Sheets/floor.jpg"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
-
+            Resume[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
+            Resume[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
+            Resume[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
+            Resume[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
+            BTitle[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
+            BTitle[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
+            
             kitchenChairTable[0] = kitchenSpriteSheet.crop(21,27,62,54);
             kitchenChairTable[1] = kitchenSpriteSheet.crop(108,14,30,35);
             kitchenChairTable[2] = kitchenSpriteSheet.crop(108,52,30,35);

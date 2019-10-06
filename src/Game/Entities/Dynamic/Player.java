@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.Static.*;
+import Game.GameStates.State;
 import Game.World.BaseWorld;
 import Main.Handler;
 import Resources.Animation;
@@ -10,6 +11,7 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import org.w3c.dom.css.Counter;
 
@@ -25,6 +27,7 @@ public class Player extends BaseDynamicEntity {
 	private int selectClient = 0;//Indicates selected client; value must be 0-4
 	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
+	private int randomCustomer;
 	
 	
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
@@ -40,6 +43,12 @@ public class Player extends BaseDynamicEntity {
 
 	public void tick(){
 		playerAnim.tick();
+		
+		//Checks if player has won and sends to WinState
+		if(money>=50) {
+			State.setState(handler.getGame().winState);
+		}
+		
 		if(xPos + width >= handler.getWidth()){
 			direction = "left";
 
@@ -73,6 +82,7 @@ public class Player extends BaseDynamicEntity {
 			}
 		}
 
+		//Client selection keys 1-5
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)&&handler.getWorld().clients.size()>0) {
 			selectClient = 0;
 			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
@@ -101,7 +111,22 @@ public class Player extends BaseDynamicEntity {
 				}
 			}
 		}
-
+		
+		//Pause
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+			State.setState(handler.getGame().pauseState);
+		}
+		
+		//Debug commands
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)&&handler.getWorld().clients.size()>0) { //Serve a customer instantly
+			ringCustomerDebug();
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_K)) { //Instant win
+			State.setState(handler.getGame().winState);
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) { //Instant lose
+			State.setState(handler.getGame().loseState);
+		}
 
 	}
 
@@ -186,5 +211,37 @@ public class Player extends BaseDynamicEntity {
 	}
 	public Burger getBurger(){
 		return this.burger;
+	}
+
+	private void ringCustomerDebug() {
+		randomCustomer = new Random().nextInt(5);
+		//Tip of 15% if client is served before patience reaches half
+		if (handler.getWorld().clients.get(selectClient).getOGpatience()/2 > handler.getWorld().clients.get(selectClient).getPatience())
+			money+=handler.getWorld().clients.get(selectClient).order.value*(1+0.15);
+		else money+=handler.getWorld().clients.get(selectClient).order.value;
+		//Increase every client's patience when order is given exactly right
+		for (Client clients: handler.getWorld().clients) {
+			clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
+		
+			//Counting how many times the inspector was served on time
+			for(Client client: handler.getWorld().clients) {
+				if(client.sprite.equals(Images.people[9]))
+					inspectorOnTime++;
+			}
+		}
+		
+		//Moves all clients after the served client backwards
+		if (selectClient>0) {
+			for (int i = selectClient; i >= 0; i--) {
+			handler.getWorld().clients.get(i).moveBackwards();
+			}
+		}
+		
+		handler.getWorld().clients.remove(selectClient);
+		handler.getPlayer().createBurger();
+		matched = false;
+		System.out.println("Total money earned is: " + String.valueOf(money));
+		selectClient = 0;
+		return;
 	}
 }
