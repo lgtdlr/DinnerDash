@@ -22,7 +22,7 @@ public class Player extends BaseDynamicEntity {
 	private Burger burger;
 	private String direction = "right";
 	private int interactionCounter = 0;
-	private int selectClient = 0;
+	private int selectClient = 0;//Indicates selected client; value must be 0-4
 	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
 	
@@ -106,7 +106,7 @@ public class Player extends BaseDynamicEntity {
 	}
 
 	private void ringCustomer() {
-		
+		matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		if(matched){
 			//Tip of 15% if client is served before patience reaches half
 			if (handler.getWorld().clients.get(selectClient).getOGpatience()/2 > handler.getWorld().clients.get(selectClient).getPatience())
@@ -125,7 +125,7 @@ public class Player extends BaseDynamicEntity {
 			
 			//Moves all clients after the served client backwards
 			if (selectClient>0) {
-				for (int i = selectClient-1; i <= 0; i++) {
+				for (int i = selectClient; i >= 0; i--) {
 				handler.getWorld().clients.get(i).moveBackwards();
 				}
 			}
@@ -160,16 +160,16 @@ public class Player extends BaseDynamicEntity {
 			g.drawRect(1, 96, 64-4, 64+8);
 			break;
 		case 3:
-			g.drawRect(1, 96*2+4, 64-4, 64+8);
+			g.drawRect(1, 96*(handler.getWorld().clients.size()-3)+4, 60, 72);
 			break;
 		case 2:
-			g.drawRect(1, 96*3+8, 64-4, 64+8);
+			g.drawRect(1, 96*(handler.getWorld().clients.size()-2)+8, 60, 72);
 			break;
 		case 1:
-			g.drawRect(1, 96*4+12, 64-4, 64+8);
+			g.drawRect(1, 96*(handler.getWorld().clients.size()-1)+12, 60, 72);
 			break;
 		case 0:
-			g.drawRect(1, 96*5+16, 64-4, 64+8);
+			g.drawRect(1, 96*(handler.getWorld().clients.size())+16, 60, 72);
 			break;
 		default:
 			break;
