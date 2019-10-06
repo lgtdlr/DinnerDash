@@ -23,7 +23,10 @@ public class Player extends BaseDynamicEntity {
 	private String direction = "right";
 	private int interactionCounter = 0;
 	private int selectClient = 0;
+	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
+	
+	
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
 		super(sprite, xPos, yPos,82,112, handler);
 		createBurger();
@@ -112,6 +115,12 @@ public class Player extends BaseDynamicEntity {
 			//Increase every client's patience when order is given exactly right
 			for (Client clients: handler.getWorld().clients) {
 				clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
+			
+				//Counting how many times the inspector was served on time
+				for(Client client: handler.getWorld().clients) {
+					if(client.sprite.equals(Images.people[9]))
+						inspectorOnTime++;
+				}
 			}
 			
 			//Moves all clients after the served client backwards
@@ -120,6 +129,7 @@ public class Player extends BaseDynamicEntity {
 				handler.getWorld().clients.get(i).moveBackwards();
 				}
 			}
+			
 			handler.getWorld().clients.remove(selectClient);
 			handler.getPlayer().createBurger();
 			matched = false;
