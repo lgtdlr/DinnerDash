@@ -169,6 +169,7 @@ public class Player extends BaseDynamicEntity {
 			g.drawRect(1, 96*(handler.getWorld().clients.size()-1)+12, 60, 72);
 			break;
 		case 0:
+			if (handler.getWorld().clients.size()>0)
 			g.drawRect(1, 96*(handler.getWorld().clients.size())+16, 60, 72);
 			break;
 		default:
