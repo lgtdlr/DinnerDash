@@ -49,7 +49,7 @@ public class Images {
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
-        people = new BufferedImage[10];
+        people = new BufferedImage[11];
         kitchenCounter = new BufferedImage[9];
         ingredients = new BufferedImage[8];
         chef = new BufferedImage[4];
@@ -99,6 +99,7 @@ public class Images {
             people[7] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Songwriter3Male.png"));
             people[8] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Weather_Reporter2Female.png"));
             people[9] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Inspector.png"));//Added inspector image
+            people[10] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Anti-V.png"));//Added Anti-V image
 
             kitchenCounter[0] = kitchenCounterSpriteSheet.crop(224,12,32,43);//stoveTop
             kitchenCounter[1] = kitchenCounterSpriteSheet.crop(96,76,32,43);//Vegetables

@@ -24,7 +24,7 @@ public class Client extends BaseDynamicEntity {
     private int countOnTime=0;//Counts how many times did inspector get food on time
     
     public Client(int xPos, int yPos, Handler handler) {
-        super(Images.people[new Random().nextInt(10)], xPos, yPos,64,72, handler);
+        super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
         runOnce = 0;
         runOnce1 = 0;
         runOnce2 = 0;
