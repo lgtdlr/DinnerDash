@@ -3,6 +3,7 @@ package Game.Entities.Dynamic;
 import Game.Entities.Static.Burger;
 import Game.Entities.Static.Item;
 import Game.Entities.Static.Order;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Images;
 
@@ -15,19 +16,36 @@ public class Client extends BaseDynamicEntity {
     private double OGpatience;
     Order order;
     public boolean isLeaving = false;
-    private int runOnce=0;//To make condition run once in tick()
-    public int inspectorNotOnTime=0;//How many times inspector does not get food on time
+    private int runOnce;//To make condition run once in tick()
+    private int runOnce1;//To make condition run once in tick()
+    private int runOnce2;//To make condition run once in tick()
+    public int inspectorNotOnTime=0;//Indicates inspector did not get food on time
+    private int countNotOnTime=0;//Counts how many times did inspectors NOT get food on time
+    private int countOnTime=0;//Counts how many times did inspector get food on time
     
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(10)], xPos, yPos,64,72, handler);
+        runOnce = 0;
+        runOnce1 = 0;
+        runOnce2 = 0;
         setPatience(new Random().nextInt(120*60)+60*60);
+        setOGpatience(getPatience());
+        
         //Subtracting 6% patience to all future customers for each inspector not served
-        if(inspectorNotOnTime!=0)
-        	setOGpatience(getPatience()-getPatience()*0.06*inspectorNotOnTime);
-        else setOGpatience(getPatience());
-        //Adding 6% patience to all future customers for each inspector served
-        if(handler.getPlayer().inspectorOnTime!=0)
-        	setOGpatience(getPatience()*1.10*handler.getPlayer().inspectorOnTime);
+        if(inspectorNotOnTime!=0) {
+        	countNotOnTime++;
+        	setPatience(getOGpatience()-getOGpatience()*(0.06*countNotOnTime));
+        	setOGpatience(getPatience());
+        	inspectorNotOnTime=0;
+        }
+        
+        //Adding 10% patience to all future customers for each inspector served
+        if(handler.getPlayer().inspectorOnTime!=0) {
+        	countOnTime++;
+        	setPatience(getOGpatience()+getOGpatience()*(0.10*countOnTime));
+        	setOGpatience(getPatience());
+        	handler.getPlayer().inspectorOnTime=0;
+        }
         
         int numOfIngredients = new Random().nextInt(4)+1;
         int chumOrMeat = new Random().nextInt(2);
@@ -76,15 +94,19 @@ public class Client extends BaseDynamicEntity {
         }
         //Checks if inspector is served on time and if not, set money to 0
 		if(sprite.equals(Images.people[9])) {
-			if(isLeaving) {
-				handler.getPlayer().money=0;
+			if(isLeaving && runOnce == 0) {
+				handler.getPlayer().money-=handler.getPlayer().money/2;
 				inspectorNotOnTime++;
+				runOnce = 1;
 			}
 		}
+		
 		//Adding 12% patience to customers if inspector is served
-		if(handler.getPlayer().inspectorOnTime!=0 && runOnce==0) {
-			setPatience(getPatience()*1.12);
-			runOnce=1;
+		if(handler.getPlayer().inspectorOnTime!=0 && runOnce1==0) {
+			for(Client client: handler.getWorld().clients) {
+				client.setPatience(getPatience()*1.12);
+			}
+			runOnce1=1;
 		}
 			
     }
@@ -94,6 +116,9 @@ public class Client extends BaseDynamicEntity {
             g.drawImage(Images.tint(sprite,1.0f,((float)getPatience()/(float)getOGpatience()),((float)getPatience()/(float)getOGpatience())),xPos,yPos,width,height,null);
 
             ((Burger) order.food).render(g);
+        } else if (runOnce2==0){
+        	handler.getPlayer().setAmountThatLeft(handler.getPlayer().getAmountThatLeft()+1);
+        	runOnce2=1;
         }
     }
 

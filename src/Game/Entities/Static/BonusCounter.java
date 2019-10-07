@@ -8,9 +8,9 @@ import java.util.Random;
 
 public class BonusCounter extends BaseCounter {
 
-    int counter = 0;
+    int timer = 0;
     int activationThreshold = 0;
-    int activationCounter = 0;
+    int activationTimer = 0;
     boolean activated = false;
     int doOnce = 0;
     float tint = 1;
@@ -20,22 +20,23 @@ public class BonusCounter extends BaseCounter {
 
     @Override
     public void tick() {
-    	counter++;
+    	timer++;
     	do {
 			activationThreshold = new Random().nextInt(9999);
 		} while (activationThreshold<1000);
     	
-        if(counter >= activationThreshold){
+        if(timer >= activationThreshold){
         	
         	if (doOnce == 0) {
-        		activationCounter = counter;
+        		activationTimer = timer;
         		doOnce++;
         	}
         	activated = true;
-        	if (counter-activationCounter >= 120 || !activated) {
-        		counter = 0;
-        		activationCounter = 0;
+        	if (timer-activationTimer >= 120 || !activated) {
+        		timer = 0;
+        		activationTimer = 0;
         		activated = false;
+        		doOnce = 0;
         	}
         }
     }

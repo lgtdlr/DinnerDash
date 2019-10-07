@@ -20,23 +20,18 @@ public class WinState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
-            handler.getMouseManager().setUimanager(null);
+        uiManager.addObjects(new UIImageButton(175, 700, 128, 64, Images.Restart, () -> {
+        	handler.getMouseManager().setUimanager(null);
+        	handler.getPlayer().setAmountThatLeft(0);
+            handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.Options, () -> {
+        uiManager.addObjects(new UIImageButton(550, 712, 128, 32, Images.Title, () -> {
             handler.getMouseManager().setUimanager(null);
+            handler.getPlayer().setAmountThatLeft(0);
             State.setState(handler.getGame().menuState);
         }));
-
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
-        }));
-
-
-
 
 
     }
@@ -61,6 +56,15 @@ public class WinState extends State {
     @Override
     public void render(Graphics g) {
         g.drawImage(Images.Win,0,0,870,820,null);
+        g.drawImage(Images.Karen,handler.getWidth()/2-100,-60,480,480,null);
+        Color KAREN = new Color(165, 216, 63);
+        g.setColor(KAREN);
+		g.setFont(new Font("ComicSans", Font.BOLD, 32));
+		g.drawString("YOU WIN!", handler.getWidth()/2+60, 110);
+		g.drawString("Clients served: " + handler.getPlayer().getAmountServed(), handler.getWidth()/2, 150);
+		g.drawString("Clients that left: " + handler.getPlayer().getAmountThatLeft(), handler.getWidth()/2, 190);
+        g.drawImage(Images.PlanktonWin,0,0,870,820,null);
+        g.drawImage(Images.overlayBox,0,620,870,200,null);
         uiManager.Render(g);
 
     }

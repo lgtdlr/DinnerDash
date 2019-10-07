@@ -17,7 +17,7 @@ import org.w3c.dom.css.Counter;
 
 public class Player extends BaseDynamicEntity {
 	Item item;
-	float money;
+	float money=0;
 	int speed = 7;
 	int BaseSpeed=speed;//Used to get base move speed back
 	boolean matched = false;
@@ -28,6 +28,8 @@ public class Player extends BaseDynamicEntity {
 	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
 	private int randomCustomer;
+	private int amountServed=0;
+	private int amountThatLeft=0;
 	
 	
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
@@ -47,6 +49,11 @@ public class Player extends BaseDynamicEntity {
 		//Checks if player has won and sends to WinState
 		if(money>=50) {
 			State.setState(handler.getGame().winState);
+		}
+		
+		//Checks if player lost
+		if (amountThatLeft>9) {
+			State.setState(handler.getGame().loseState);
 		}
 		
 		if(xPos + width >= handler.getWidth()){
@@ -85,23 +92,18 @@ public class Player extends BaseDynamicEntity {
 		//Client selection keys 1-5
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1)&&handler.getWorld().clients.size()>0) {
 			selectClient = 0;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_2)&&handler.getWorld().clients.size()>1) {
 			selectClient = 1;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 			}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_3)&&handler.getWorld().clients.size()>2) {
 			selectClient = 2;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_4)&&handler.getWorld().clients.size()>3) {
 			selectClient = 3;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_5)&&handler.getWorld().clients.size()>4) {
 			selectClient = 4;
-			matched = ((Burger)handler.getWorld().clients.get(selectClient).order.food).equals(handler.getCurrentBurger());
 		}
 			
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
@@ -121,12 +123,19 @@ public class Player extends BaseDynamicEntity {
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)&&handler.getWorld().clients.size()>0) { //Serve a customer instantly
 			ringCustomerDebug();
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)&&handler.getWorld().clients.size()>0) { //Lower a client's patience
+			decreasePatience();
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)&&handler.getWorld().clients.size()>0) { //Increase a client's patience
+			increasePatience();
+		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_K)) { //Instant win
 			State.setState(handler.getGame().winState);
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) { //Instant lose
 			State.setState(handler.getGame().loseState);
 		}
+		
 
 	}
 
@@ -160,6 +169,7 @@ public class Player extends BaseDynamicEntity {
 			matched = false;
 			System.out.println("Total money earned is: " + String.valueOf(money));
 			selectClient = 0;
+			amountServed++;
 			return;
 		}
 	}
@@ -174,10 +184,12 @@ public class Player extends BaseDynamicEntity {
 		g.setColor(Color.green);
 		burger.render(g);
 		g.setColor(Color.green);
-		g.fillRect(handler.getWidth()/2 -210, 3, 320, 32);;
+		g.fillRect(handler.getWidth()/2 -210, 3, 320, 72);;
+		g.drawImage(Images.Karen,handler.getWidth()/2 -310, -50, 500, 200,null);
 		g.setColor(Color.yellow);
 		g.setFont(new Font("ComicSans", Font.BOLD, 32));
-		g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 30);
+		g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 35);
+		g.drawString("Clients Served: " + amountServed, handler.getWidth()/2 -200, 75);
 		
 		//Visual indication of which client is selected
 		switch (selectClient) {
@@ -213,6 +225,22 @@ public class Player extends BaseDynamicEntity {
 		return this.burger;
 	}
 
+	public int getAmountServed() {
+		return amountServed;
+	}
+
+	public int getAmountThatLeft() {
+		return amountThatLeft;
+	}
+
+	public void setAmountThatLeft(int amountThatLeft) {
+		this.amountThatLeft = amountThatLeft;
+	}
+
+	public float getMoney() {
+		return money;
+	}
+
 	private void ringCustomerDebug() {
 		randomCustomer = new Random().nextInt(5);
 		//Tip of 15% if client is served before patience reaches half
@@ -242,6 +270,16 @@ public class Player extends BaseDynamicEntity {
 		matched = false;
 		System.out.println("Total money earned is: " + String.valueOf(money));
 		selectClient = 0;
+		amountServed++;
 		return;
 	}
+	
+	private void increasePatience() {
+		handler.getWorld().clients.get(selectClient).setPatience(handler.getWorld().clients.get(selectClient).getPatience()+500);
+	}
+	
+	private void decreasePatience() {
+		handler.getWorld().clients.get(selectClient).setPatience(handler.getWorld().clients.get(selectClient).getPatience()-500);
+	}
+	
 }

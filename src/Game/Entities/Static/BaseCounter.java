@@ -32,8 +32,8 @@ public class BaseCounter extends BaseStaticEntity {
 				clients.setPatience(clients.getOGpatience());
 			}
         	handler.getBonusCounter().activated=false;
-        	handler.getBonusCounter().counter=0;
-        	handler.getBonusCounter().activationCounter=0;
+        	handler.getBonusCounter().timer=0;
+        	handler.getBonusCounter().activationTimer=0;
         }
     }
     public void tick(){

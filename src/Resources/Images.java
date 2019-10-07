@@ -18,9 +18,13 @@ public class Images {
     public static BufferedImage welcome;
     public static BufferedImage Pause;
     public static BufferedImage Win;
+    public static BufferedImage PlanktonWin;
     public static BufferedImage Lose;
+    public static BufferedImage Karen;
+    public static BufferedImage overlayBox;
     public static BufferedImage[] Resume;
     public static BufferedImage[] Restart;
+    public static BufferedImage[] Title;
     public static BufferedImage[] people;
     public static BufferedImage[] chef;
     public static BufferedImage[] kitchenChairTable;
@@ -41,6 +45,7 @@ public class Images {
         butstart = new BufferedImage[3];
         Resume = new BufferedImage[2];
         Restart = new BufferedImage[2];
+        Title = new BufferedImage[2];
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
@@ -59,17 +64,22 @@ public class Images {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.jpg"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
-            Win = ImageIO.read(getClass().getResourceAsStream("/Sheets/Win.jpg"));
-            Lose = ImageIO.read(getClass().getResourceAsStream("/Sheets/Lose.jpg"));
+            Win = ImageIO.read(getClass().getResourceAsStream("/Sheets/Win.png"));
+            Lose = ImageIO.read(getClass().getResourceAsStream("/Sheets/Lose2.jpg"));
+            Karen = ImageIO.read(getClass().getResourceAsStream("/Sheets/Karen.png"));
+            PlanktonWin = ImageIO.read(getClass().getResourceAsStream("/Sheets/PlanktonWin.png"));
+            overlayBox = ImageIO.read(getClass().getResourceAsStream("/Sheets/OverlayBox.png"));
             welcome = ImageIO.read(getClass().getResourceAsStream("/Sheets/Welcome.png"));
             floor = ImageIO.read(getClass().getResourceAsStream("/Sheets/floor.jpg"));
-            butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
-            butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
-            butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
-            Resume[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
-            Resume[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
-            Resume[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
-            Resume[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
+            butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));
+            butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));
+            butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));
+            Resume[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Resume.png"));
+            Resume[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeP.png"));
+            Restart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/playAgain1.png"));
+            Restart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/playAgain1P.png"));
+            Title[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/Title.png"));
+            Title[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/TitleP.png"));
             BTitle[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//hoverbut
             BTitle[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//clickbut
             

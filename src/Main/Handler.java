@@ -1,5 +1,6 @@
 package Main;
 
+import Game.Entities.Dynamic.Client;
 import Game.Entities.Dynamic.Player;
 import Game.Entities.Static.BaseCounter;
 import Game.Entities.Static.Burger;
@@ -31,6 +32,8 @@ public class Handler {
 
 
     private Player player;
+    
+    private Client clients;
 
     public Handler(){
 
@@ -79,7 +82,7 @@ public class Handler {
         this.player = player;
     }
 
-    public BonusCounter getBonusCounter(){
+	public BonusCounter getBonusCounter(){
         for (BaseCounter counter: getWorld().Counters){
             if(counter instanceof BonusCounter){
                 return (BonusCounter) counter;
