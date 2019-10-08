@@ -86,13 +86,13 @@ public class Player extends BaseDynamicEntity {
 		}
 		
 		//Pressing ctrl will make the player stop
-				if (handler.getKeyManager().ctrlButt) {
-					idle = true;
-					speed=0;
-				} else {
-					speed=BaseSpeed;
-					idle = false;
-				}
+		if (handler.getKeyManager().ctrlButt) {
+			idle = true;
+			speed=0;
+		} else if (idle == true && !handler.getKeyManager().ctrlButt){
+			speed=BaseSpeed;
+			idle = false;
+		}
 
 		if(handler.getKeyManager().fattbut){
 			for(BaseCounter counter: handler.getWorld().Counters){
