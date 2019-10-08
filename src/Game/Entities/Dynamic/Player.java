@@ -24,7 +24,7 @@ public class Player extends BaseDynamicEntity {
 	private Burger burger;
 	private String direction = "right";
 	private int interactionCounter = 0;
-	private int selectClient = 0;//Indicates selected client; value must be 0-4
+	public int selectClient = 0;//Indicates selected client; value must be 0-4
 	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
 	private int randomCustomer;

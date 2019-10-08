@@ -14,6 +14,7 @@ import java.util.Random;
 public class Client extends BaseDynamicEntity {
     private double patience;
     private double OGpatience;
+    private int patienceCounter=0;//Used for counting every 8% patience loss for Anti-V
     Order order;
     public boolean isLeaving = false;
     private int runOnce;//To make condition run once in tick()
@@ -22,6 +23,7 @@ public class Client extends BaseDynamicEntity {
     public int inspectorNotOnTime=0;//Indicates inspector did not get food on time
     private int countNotOnTime=0;//Counts how many times did inspectors NOT get food on time
     private int countOnTime=0;//Counts how many times did inspector get food on time
+    private int posModifier;//Used for Anti-V affecting nearby clients
     
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
@@ -46,6 +48,7 @@ public class Client extends BaseDynamicEntity {
         	setOGpatience(getPatience());
         	handler.getPlayer().inspectorOnTime=0;
         }
+        
         
         int numOfIngredients = new Random().nextInt(4)+1;
         int chumOrMeat = new Random().nextInt(2);
@@ -101,13 +104,33 @@ public class Client extends BaseDynamicEntity {
 			}
 		}
 		
+		
 		//Adding 12% patience to customers if inspector is served
 		if(handler.getPlayer().inspectorOnTime!=0 && runOnce1==0) {
-			for(Client client: handler.getWorld().clients) {
-				client.setPatience(getPatience()*1.12);
-			}
+				setPatience(getPatience()*1.12);
+				System.out.println("Activated");
+			
 			runOnce1=1;
 		}
+		
+		//As Anti-V's patience goes down every 8% they will lower another client that is in front or being(randomly) patience by 4%
+        if(sprite.equals(Images.people[10])) {
+        	if(getPatience()<=getOGpatience()-getOGpatience()*(0.08+0.08*patienceCounter)) {
+        		patienceCounter++;
+        		//Randomly front or behind Anti-V
+        		if(new Random().nextBoolean())
+        			posModifier=1;
+        		else posModifier=-1;
+        		//To avoid out of bounds exception
+        		if(handler.getWorld().clients.indexOf(this)+posModifier>= handler.getWorld().clients.size())
+        			posModifier=-1;
+        		else if (handler.getWorld().clients.indexOf(this)+posModifier<0)
+        			posModifier=1;
+        		
+        		//Actual lowering of 4% patience of randomly selected client
+        		handler.getWorld().clients.get(handler.getWorld().clients.indexOf(this) + posModifier).setPatience(getPatience()-getPatience()*0.04);
+        	}	
+        }
 			
     }
     public void render(Graphics g){
