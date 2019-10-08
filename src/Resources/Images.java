@@ -28,6 +28,7 @@ public class Images {
     public static BufferedImage[] people;
     public static BufferedImage[] chef;
     public static BufferedImage[] plankton;
+    public static BufferedImage[] planktonIdle;
     public static BufferedImage[] kitchenChairTable;
     public static BufferedImage chair;
     public static BufferedImage table;
@@ -60,6 +61,7 @@ public class Images {
         powerUps = new BufferedImage[2];
         chef = new BufferedImage[4];
         plankton = new BufferedImage[10];
+        planktonIdle = new BufferedImage[7];
         try {
 
             kitchenSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/sprite.png")));
@@ -151,6 +153,14 @@ public class Images {
             plankton[7] = planktonSpriteSheet.crop(467,136,67,134);
             plankton[8] = planktonSpriteSheet.crop(525,136,67,134);
             plankton[9] = planktonSpriteSheet.crop(594,136,67,134);
+            
+            planktonIdle[0] = planktonSpriteSheet.crop(0,0,55,135);
+            planktonIdle[1] = planktonSpriteSheet.crop(59,0,53,135);
+            planktonIdle[2] = planktonSpriteSheet.crop(116,0,46,135);
+            planktonIdle[3] = planktonSpriteSheet.crop(166,0,42,135);
+            planktonIdle[4] = planktonSpriteSheet.crop(212,0,40,135);
+            planktonIdle[5] = planktonSpriteSheet.crop(256,0,45,135);
+            planktonIdle[6] = planktonSpriteSheet.crop(305,0,55,135);
 
             icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/icon.png")));
 

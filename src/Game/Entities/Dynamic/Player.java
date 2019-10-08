@@ -27,15 +27,18 @@ public class Player extends BaseDynamicEntity {
 	public int selectClient = 0;//Indicates selected client; value must be 0-4
 	public int inspectorOnTime=0;//How many times inspector was served on time
 	private Animation playerAnim;
+	private Animation playerIdleAnim;
 	private int randomCustomer;
 	private int amountServed=0;
 	private int amountThatLeft=0;
+	private boolean idle = false;
 	
 	
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
 		super(sprite, xPos, yPos,82,112, handler);
 		createBurger();
 		playerAnim = new Animation(120,Images.plankton);
+		playerIdleAnim = new Animation(120,Images.planktonIdle);
 	}
 
 	public void createBurger(){
@@ -45,6 +48,7 @@ public class Player extends BaseDynamicEntity {
 
 	public void tick(){
 		playerAnim.tick();
+		playerIdleAnim.tick();
 		
 		//Checks if player has won and sends to WinState
 		if(money>=50) {
@@ -80,6 +84,15 @@ public class Player extends BaseDynamicEntity {
 		} else {
 			speed=BaseSpeed;
 		}
+		
+		//Pressing ctrl will make the player stop
+				if (handler.getKeyManager().ctrlButt) {
+					idle = true;
+					speed=0;
+				} else {
+					speed=BaseSpeed;
+					idle = false;
+				}
 
 		if(handler.getKeyManager().fattbut){
 			for(BaseCounter counter: handler.getWorld().Counters){
@@ -175,12 +188,22 @@ public class Player extends BaseDynamicEntity {
 	}
 
 	public void render(Graphics g) {
-		if(direction=="right") {
-			g.drawImage(playerAnim.getCurrentFrame(), xPos, yPos, width, height, null);
-		}else{
-			g.drawImage(playerAnim.getCurrentFrame(), xPos+width, yPos, -width, height, null);
+		if (idle) {
+			if(direction=="right") {
+				g.drawImage(playerIdleAnim.getCurrentFrame(), xPos, yPos, width, height, null);
+			}else{
+				g.drawImage(playerIdleAnim.getCurrentFrame(), xPos+width, yPos, -width, height, null);
 
+			}
+		} else {
+			if(direction=="right") {
+				g.drawImage(playerAnim.getCurrentFrame(), xPos, yPos, width, height, null);
+			}else{
+				g.drawImage(playerAnim.getCurrentFrame(), xPos+width, yPos, -width, height, null);
+
+			}
 		}
+		
 		g.setColor(Color.green);
 		burger.render(g);
 		g.setColor(Color.green);
