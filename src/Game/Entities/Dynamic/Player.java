@@ -35,7 +35,7 @@ public class Player extends BaseDynamicEntity {
 	public Player(BufferedImage sprite, int xPos, int yPos, Handler handler) {
 		super(sprite, xPos, yPos,82,112, handler);
 		createBurger();
-		playerAnim = new Animation(120,Images.chef);
+		playerAnim = new Animation(120,Images.plankton);
 	}
 
 	public void createBurger(){

@@ -27,6 +27,7 @@ public class Images {
     public static BufferedImage[] Title;
     public static BufferedImage[] people;
     public static BufferedImage[] chef;
+    public static BufferedImage[] plankton;
     public static BufferedImage[] kitchenChairTable;
     public static BufferedImage chair;
     public static BufferedImage table;
@@ -42,6 +43,8 @@ public class Images {
     public static SpriteSheet kitchenCounterGlowSpriteSheet;
     public static SpriteSheet burgerSpriteSheet;
     public static SpriteSheet chefSpriteSheet;
+    public static SpriteSheet planktonSpriteSheet;
+
     public Images() {
 
         butstart = new BufferedImage[3];
@@ -56,6 +59,7 @@ public class Images {
         ingredients = new BufferedImage[8];
         powerUps = new BufferedImage[2];
         chef = new BufferedImage[4];
+        plankton = new BufferedImage[10];
         try {
 
             kitchenSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/sprite.png")));
@@ -64,6 +68,7 @@ public class Images {
             burgerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/burger.png")));
             chum = ImageIO.read(getClass().getResourceAsStream("/Sheets/chum.png"));
             chefSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.png")));
+            planktonSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/plankton.png")));
 
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.jpg"));
@@ -135,6 +140,17 @@ public class Images {
             chef[1] = chefSpriteSheet.crop(159,3,66,120);
             chef[2] = chefSpriteSheet.crop(287,3,67,120);
             chef[3] = chefSpriteSheet.crop(31,129,66,120);
+            
+            plankton[0] = planktonSpriteSheet.crop(0,136,67,134);
+            plankton[1] = planktonSpriteSheet.crop(68,136,67,134);
+            plankton[2] = planktonSpriteSheet.crop(132,136,67,134);
+            plankton[3] = planktonSpriteSheet.crop(190,136,67,134);
+            plankton[4] = planktonSpriteSheet.crop(259,136,67,134);
+            plankton[5] = planktonSpriteSheet.crop(335,136,67,134);
+            plankton[6] = planktonSpriteSheet.crop(404,136,67,134);
+            plankton[7] = planktonSpriteSheet.crop(467,136,67,134);
+            plankton[8] = planktonSpriteSheet.crop(525,136,67,134);
+            plankton[9] = planktonSpriteSheet.crop(594,136,67,134);
 
             icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/icon.png")));
 
