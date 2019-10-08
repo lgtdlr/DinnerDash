@@ -19,7 +19,6 @@ public class Client extends BaseDynamicEntity {
     public boolean isLeaving = false;
     private int runOnce;//To make condition run once in tick()
     private int runOnce1;//To make condition run once in tick()
-    private int runOnce2;//To make condition run once in tick()
     public int inspectorNotOnTime=0;//Indicates inspector did not get food on time
     private int countNotOnTime=0;//Counts how many times did inspectors NOT get food on time
     private int countOnTime=0;//Counts how many times did inspector get food on time
@@ -29,7 +28,6 @@ public class Client extends BaseDynamicEntity {
         super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
         runOnce = 0;
         runOnce1 = 0;
-        runOnce2 = 0;
         setPatience(new Random().nextInt(120*60)+60*60);
         setOGpatience(getPatience());
         
@@ -97,20 +95,22 @@ public class Client extends BaseDynamicEntity {
         }
         //Checks if inspector is served on time and if not, set money to 0
 		if(sprite.equals(Images.people[9])) {
-			if(isLeaving && runOnce == 0) {
+			if(isLeaving) {
 				handler.getPlayer().money-=handler.getPlayer().money/2;
 				inspectorNotOnTime++;
-				runOnce = 1;
+				if (inspectorNotOnTime>0) {
+					inspectorNotOnTime=1;
+				}
 			}
 		}
 		
 		
 		//Adding 12% patience to customers if inspector is served
-		if(handler.getPlayer().inspectorOnTime!=0 && runOnce1==0) {
+		if(handler.getPlayer().inspectorOnTime!=0 && runOnce==0) {
 				setPatience(getPatience()*1.12);
 				System.out.println("Activated");
 			
-			runOnce1=1;
+			runOnce=1;
 		}
 		
 		//As Anti-V's patience goes down every 8% they will lower another client that is in front or being(randomly) patience by 4%
@@ -139,9 +139,9 @@ public class Client extends BaseDynamicEntity {
             g.drawImage(Images.tint(sprite,1.0f,((float)getPatience()/(float)getOGpatience()),((float)getPatience()/(float)getOGpatience())),xPos,yPos,width,height,null);
 
             ((Burger) order.food).render(g);
-        } else if (runOnce2==0){
+        } else if (runOnce1==0){
         	handler.getPlayer().setAmountThatLeft(handler.getPlayer().getAmountThatLeft()+1);
-        	runOnce2=1;
+        	runOnce1=1;
         }
     }
 

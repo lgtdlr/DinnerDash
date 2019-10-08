@@ -32,12 +32,14 @@ public class Images {
     public static BufferedImage table;
     public static BufferedImage[] kitchenCounter;
     public static BufferedImage[] ingredients;
+    public static BufferedImage[] powerUps;
     public static BufferedImage chum;
     public static BufferedImage[] BTitle;
     public static BufferedImage[] Options;
     public static ImageIcon icon;
     public static SpriteSheet kitchenSpriteSheet;
     public static SpriteSheet kitchenCounterSpriteSheet;
+    public static SpriteSheet kitchenCounterGlowSpriteSheet;
     public static SpriteSheet burgerSpriteSheet;
     public static SpriteSheet chefSpriteSheet;
     public Images() {
@@ -50,13 +52,15 @@ public class Images {
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
         people = new BufferedImage[11];
-        kitchenCounter = new BufferedImage[9];
+        kitchenCounter = new BufferedImage[11];
         ingredients = new BufferedImage[8];
+        powerUps = new BufferedImage[2];
         chef = new BufferedImage[4];
         try {
 
             kitchenSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/sprite.png")));
             kitchenCounterSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/kitchen_cabinets_by_ayene_chan.png")));
+            kitchenCounterGlowSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/kitchen_cabinets_by_ayene_chan_glow.png")));
             burgerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/burger.png")));
             chum = ImageIO.read(getClass().getResourceAsStream("/Sheets/chum.png"));
             chefSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.png")));
@@ -110,6 +114,8 @@ public class Images {
             kitchenCounter[6] = kitchenCounterSpriteSheet.crop(0,133,32,50);//plates
             kitchenCounter[7] = kitchenCounterSpriteSheet.crop(0,63,34,56);//buns
             kitchenCounter[8] = kitchenCounterSpriteSheet.crop(160, 12, 32, 43);//mortar
+            kitchenCounter[9] = kitchenCounterGlowSpriteSheet.crop(96, 133, 32, 50);//balance glow
+            kitchenCounter[10] = kitchenCounterSpriteSheet.crop(96, 133, 32, 50);//balance
 
             ingredients[0] = burgerSpriteSheet.crop(25, 16, 112, 43); // top bun
             ingredients[1] = burgerSpriteSheet.crop(30, 134, 103, 48); // patty
@@ -120,6 +126,11 @@ public class Images {
             ingredients[6] = burgerSpriteSheet.crop(575, 263, 131, 51); // plate
             ingredients[7] = chum; //special ingredient
 
+            //powerUps[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/PowerUps/SecretFormula.png"));
+            //powerUps[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/PowerUps/hydroSpatula.png"));
+            //powerUps[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/PowerUps/leSpatula.png"));
+            //powerUps[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/PowerUps/goldenSpatula.png"));
+            
             chef[0] = chefSpriteSheet.crop(30,3,66,120);
             chef[1] = chefSpriteSheet.crop(159,3,66,120);
             chef[2] = chefSpriteSheet.crop(287,3,67,120);
