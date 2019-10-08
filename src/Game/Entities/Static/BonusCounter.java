@@ -15,7 +15,7 @@ public class BonusCounter extends BaseCounter {
     int doOnce = 0;
     float tint = 1;
     public BonusCounter(int xPos, int yPos, Handler handler) {
-        super(Images.kitchenCounter[10], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),113,handler);
+        super(Images.kitchenCounter[10], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),120,handler);
     }
 
     @Override

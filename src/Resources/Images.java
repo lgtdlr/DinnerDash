@@ -119,8 +119,8 @@ public class Images {
             kitchenCounter[6] = kitchenCounterSpriteSheet.crop(0,133,32,50);//plates
             kitchenCounter[7] = kitchenCounterSpriteSheet.crop(0,63,34,56);//buns
             kitchenCounter[8] = kitchenCounterSpriteSheet.crop(160, 12, 32, 43);//mortar
-            kitchenCounter[9] = kitchenCounterGlowSpriteSheet.crop(96, 133, 32, 50);//balance glow
-            kitchenCounter[10] = kitchenCounterSpriteSheet.crop(96, 133, 32, 50);//balance
+            kitchenCounter[9] = kitchenCounterGlowSpriteSheet.crop(96, 136, 32, 51);//balance glow
+            kitchenCounter[10] = kitchenCounterSpriteSheet.crop(96, 136, 32, 51);//balance
 
             ingredients[0] = burgerSpriteSheet.crop(25, 16, 112, 43); // top bun
             ingredients[1] = burgerSpriteSheet.crop(30, 134, 103, 48); // patty
