@@ -13,6 +13,8 @@ public class StoveCounter extends BaseCounter {
     boolean cooking = false;
     boolean burnt = false;
     float tint = 1;
+    public static boolean perfectlyCooked=false;
+    
     public StoveCounter(int xPos, int yPos, Handler handler) {
         super(Images.kitchenCounter[0], xPos, yPos,BaseCounter.getCOUNTERWIDTH(),102,handler);
         item = Item.burger;
@@ -39,6 +41,10 @@ public class StoveCounter extends BaseCounter {
             item.sprite = Images.ingredients[1];
         }else{
             if(timeInStove<burntTime && timeInStove>cookTime){
+            	//Checking if tint is between 0.48 and 0.53 for 12% money bonus
+            	if(tint>0.48 && tint<0.53) {
+            		perfectlyCooked=true;
+            	}
                 item.sprite = Images.tint(item.sprite,tint,tint,tint);
                 handler.getPlayer().getBurger().addIngredient(item);
                 cooking=false;

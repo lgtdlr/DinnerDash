@@ -107,10 +107,8 @@ public class Client extends BaseDynamicEntity {
 		
 		//Adding 12% patience to customers if inspector is served
 		if(handler.getPlayer().inspectorOnTime!=0 && runOnce==0) {
-				setPatience(getPatience()*1.12);
-				System.out.println("Activated");
-			
-			runOnce=1;
+				setPatience(getPatience()*1.12);	
+				runOnce=1;
 		}
 		
 		//As Anti-V's patience goes down every 8% they will lower another client that is in front or being(randomly) patience by 4%

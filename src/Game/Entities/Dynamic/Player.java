@@ -98,6 +98,7 @@ public class Player extends BaseDynamicEntity {
 			for(BaseCounter counter: handler.getWorld().Counters){
 				if (counter instanceof PlateCounter && counter.isInteractable()){
 					createBurger();
+					StoveCounter.perfectlyCooked=false;//Make sure perfectly cooked does not stay true if cleared
 				}
 			}
 		}
@@ -164,19 +165,24 @@ public class Player extends BaseDynamicEntity {
 			//Increase every client's patience when order is given exactly right
 			for (Client clients: handler.getWorld().clients) {
 				clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
-			
+			}
 				//Counting how many times the inspector was served on time
 				for(Client client: handler.getWorld().clients) {
 					if(client.sprite.equals(Images.people[9]))
 						inspectorOnTime++;
 				}
-			}
+			
 			
 			//Moves all clients after the served client backwards
 			if (selectClient>0) {
 				for (int i = selectClient; i >= 0; i--) {
 				handler.getWorld().clients.get(i).moveBackwards();
 				}
+			}
+			//Player receives extra 12% of what the client was going to give the player if meat is between 0.48 and 0.53 tint
+			if(StoveCounter.perfectlyCooked) {
+				money+=handler.getWorld().clients.get(selectClient).order.value*0.12;
+				StoveCounter.perfectlyCooked=false;
 			}
 			
 			handler.getWorld().clients.remove(selectClient);
