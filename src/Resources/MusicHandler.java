@@ -21,8 +21,6 @@ public class MusicHandler {
 
     private Handler handler;
     private Clip title;
-    private Clip win;
-    private Clip lose;
     private long clipTime = 0;
 
     public MusicHandler(Handler handler){

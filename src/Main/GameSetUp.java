@@ -83,7 +83,6 @@ public class GameSetUp implements Runnable {
         loseState = new LoseState(handler);
 
         State.setState(menuState);
-        musicHandler.restartBackground();
     }
 
     public void reStart(){

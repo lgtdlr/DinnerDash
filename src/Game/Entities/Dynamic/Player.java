@@ -52,11 +52,13 @@ public class Player extends BaseDynamicEntity {
 		
 		//Checks if player has won and sends to WinState
 		if(money>=50) {
+			handler.getGame().getMusicHandler().playWin();
 			State.setState(handler.getGame().winState);
 		}
 		
 		//Checks if player lost
 		if (amountThatLeft>9) {
+			handler.getGame().getMusicHandler().playLose();
 			State.setState(handler.getGame().loseState);
 		}
 		
@@ -150,6 +152,15 @@ public class Player extends BaseDynamicEntity {
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) { //Instant lose
 			handler.getGame().getMusicHandler().playLose();
 			State.setState(handler.getGame().loseState);
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)&&handler.getWorld().clients.size()>0) { //Print out selected client's patience in console
+			System.out.println("Selected client's patience: " + handler.getWorld().clients.get(selectClient).getPatience());
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)) { //Prints all clients' patience in console
+			System.out.println("--------------Patience------------");
+			for (int j = 0; j < handler.getWorld().clients.size(); j++) {
+				System.out.println("Client " + j + ": " + handler.getWorld().clients.get(j).getPatience());
+			}
 		}
 		
 
