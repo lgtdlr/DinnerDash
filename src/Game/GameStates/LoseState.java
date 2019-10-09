@@ -24,12 +24,14 @@ public class LoseState extends State {
         	handler.getMouseManager().setUimanager(null);
         	handler.getPlayer().setAmountThatLeft(0);
             handler.getGame().reStart();
+            handler.getGame().getMusicHandler().playGame();
             State.setState(handler.getGame().gameState);
         }));
 
         uiManager.addObjects(new UIImageButton(550, 712, 128, 32, Images.Title, () -> {
             handler.getMouseManager().setUimanager(null);
             handler.getPlayer().setAmountThatLeft(0);
+            handler.getGame().getMusicHandler().playMenu();
             State.setState(handler.getGame().menuState);
         }));
 

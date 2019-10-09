@@ -20,12 +20,14 @@ public class MusicHandler {
     //Inspired By ahmetcandiroglu' Music Handler
 
     private Handler handler;
-    private Clip background;
+    private Clip title;
+    private Clip win;
+    private Clip lose;
     private long clipTime = 0;
 
     public MusicHandler(Handler handler){
         this.handler = handler;
-        background = getClip(loadAudio("background"));
+        title = getClip(loadAudio("background"));
     }
 
     private AudioInputStream loadAudio(String url) {
@@ -58,15 +60,15 @@ public class MusicHandler {
 
         return null;
     }
-
+    
     public void resumeBackground(){
-        background.setMicrosecondPosition(clipTime);
-        background.start();
+        audioClip.setMicrosecondPosition(clipTime);
+        audioClip.start();
     }
 
     public void pauseBackground(){
-        clipTime = background.getMicrosecondPosition();
-        background.stop();
+        clipTime = audioClip.getMicrosecondPosition();
+        audioClip.stop();
     }
 
     public void restartBackground() {
@@ -74,12 +76,30 @@ public class MusicHandler {
         resumeBackground();
     }
 
-    /*Example to play a special effect
-    public void playJump() {
-        Clip clip = getClip(loadAudio("jump"));
+    //Play special
+    public void playMenu() {
+    	audioClip.stop();
+        title = getClip(loadAudio("background"));
+        title.start();
+    }
+    
+    public void playGame() {
+    	audioClip.stop();
+        Clip clip = getClip(loadAudio("game"));
         clip.start();
     }
-    */
+    
+    public void playLose() {
+    	audioClip.stop();
+        Clip clip = getClip(loadAudio("lose"));
+        clip.start();
+    }
+    
+    public void playWin() {
+    	audioClip.stop();
+        title = getClip(loadAudio("win"));
+        title.start();
+    }
 
 
 

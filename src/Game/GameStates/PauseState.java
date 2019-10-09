@@ -27,6 +27,7 @@ public class PauseState extends State {
 
         uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.Title, () -> {
             handler.getMouseManager().setUimanager(null);
+            handler.getGame().getMusicHandler().playMenu();
             State.setState(handler.getGame().menuState);
         }));
 
@@ -55,7 +56,6 @@ public class PauseState extends State {
 
     @Override
     public void render(Graphics g) {
-    	handler.getGame().reStart();
         g.drawImage(Images.Pause,0,0,880,820,null);
         uiManager.Render(g);
 

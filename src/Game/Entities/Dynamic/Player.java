@@ -6,7 +6,7 @@ import Game.World.BaseWorld;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-
+import Resources.MusicHandler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -143,9 +143,11 @@ public class Player extends BaseDynamicEntity {
 			increasePatience();
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_K)) { //Instant win
+			handler.getGame().getMusicHandler().playWin();
 			State.setState(handler.getGame().winState);
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) { //Instant lose
+			handler.getGame().getMusicHandler().playLose();
 			State.setState(handler.getGame().loseState);
 		}
 		

@@ -27,6 +27,7 @@ public class MenuState extends State {
             public void onClick() {
                 handler.getMouseManager().setUimanager(null);
                 handler.getGame().reStart();
+                handler.getGame().getMusicHandler().playGame();
                 State.setState(handler.getGame().gameState);
             }
         }));
