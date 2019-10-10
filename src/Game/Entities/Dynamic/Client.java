@@ -23,7 +23,7 @@ public class Client extends BaseDynamicEntity {
     private double runSlow=0;//Used in tick() so the command runs once every second and avoids bugs
     
     public Client(int xPos, int yPos, Handler handler) {
-        super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
+        super(Images.people[new Random().nextInt(11)], xPos, yPos,100,100, handler);
         runOnce = 0;
         setPatience(new Random().nextInt(120*60)+60*60);
         setOGpatience(getPatience());
@@ -44,7 +44,7 @@ public class Client extends BaseDynamicEntity {
         int numOfIngredients = new Random().nextInt(4)+1;
         int chumOrMeat = new Random().nextInt(2);
         order = new Order();
-        order.food = new Burger(xPos +72,yPos,52,22);
+        order.food = new Burger(xPos +72+16,yPos+24,52,22);
         ((Burger) order.food).addIngredient(Item.botBread);
         if (chumOrMeat == 1) {
         	((Burger) order.food).addIngredient(Item.burger);
@@ -89,6 +89,12 @@ public class Client extends BaseDynamicEntity {
         if(getPatience()<=0){
             isLeaving=true;
         }
+        
+        //Makes sure patience never goes over the client's OGpatience
+        if (getPatience()>getOGpatience()) {
+        	setPatience(getOGpatience());
+        }
+        
         //Checks if inspector is served on time and if not, half the money
 		if(sprite.equals(Images.people[9])) {
 			if(isLeaving && runSlow >= OGpatience) {

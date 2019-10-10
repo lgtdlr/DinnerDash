@@ -45,7 +45,7 @@ public class Player extends BaseDynamicEntity {
 	}
 
 	public void createBurger(){
-		burger = new Burger(handler.getWidth() - 110, 100, 100, 50);
+		burger = new Burger(handler.getWidth() - 110, handler.getHeight() - 300, 100, 50);
 
 	}
 
@@ -243,25 +243,9 @@ public class Player extends BaseDynamicEntity {
 		g.drawString("Clients Served: " + amountServed, handler.getWidth()/2 -200, 75);
 		
 		//Visual indication of which client is selected
-		switch (selectClient) {
-		case 4:
-			g.drawRect(1, 96, 64-4, 64+8);
-			break;
-		case 3:
-			g.drawRect(1, 96*(handler.getWorld().clients.size()-3)+4, 60, 72);
-			break;
-		case 2:
-			g.drawRect(1, 96*(handler.getWorld().clients.size()-2)+8, 60, 72);
-			break;
-		case 1:
-			g.drawRect(1, 96*(handler.getWorld().clients.size()-1)+12, 60, 72);
-			break;
-		case 0:
-			if (handler.getWorld().clients.size()>0)
-			g.drawRect(1, 96*(handler.getWorld().clients.size())+16, 60, 72);
-			break;
-		default:
-			break;
+		if ((handler.getWorld().clients.size()>0)) {
+			g.drawRect(handler.getWorld().clients.get(selectClient).xPos, handler.getWorld().clients.get(selectClient).yPos, 100, 100);
+
 		}
 	}
 
