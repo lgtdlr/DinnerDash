@@ -18,33 +18,25 @@ public class Client extends BaseDynamicEntity {
     Order order;
     public boolean isLeaving = false;
     private int runOnce;//To make condition run once in tick()
-    private int runOnce1;//To make condition run once in tick()
-    public int inspectorNotOnTime=0;//Indicates inspector did not get food on time
-    private int countNotOnTime=0;//Counts how many times did inspectors NOT get food on time
-    private int countOnTime=0;//Counts how many times did inspector get food on time
+    public int inspectorNotOnTime=0;//Indicates how many inspectors did not get food on time
     private int posModifier;//Used for Anti-V affecting nearby clients
     
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
         runOnce = 0;
-        runOnce1 = 0;
         setPatience(new Random().nextInt(120*60)+60*60);
         setOGpatience(getPatience());
         
         //Subtracting 6% patience to all future customers for each inspector not served
         if(inspectorNotOnTime!=0) {
-        	countNotOnTime++;
-        	setPatience(getOGpatience()-getOGpatience()*(0.06*countNotOnTime));
+        	setPatience(getOGpatience()-getOGpatience()*(0.06*inspectorNotOnTime));
         	setOGpatience(getPatience());
-        	inspectorNotOnTime=0;
         }
         
         //Adding 10% patience to all future customers for each inspector served
         if(handler.getPlayer().inspectorOnTime!=0) {
-        	countOnTime++;
-        	setPatience(getOGpatience()+getOGpatience()*(0.10*countOnTime));
+        	setPatience(getOGpatience()+getOGpatience()*(0.10*handler.getPlayer().inspectorOnTime));
         	setOGpatience(getPatience());
-        	handler.getPlayer().inspectorOnTime=0;
         }
         
         
@@ -93,23 +85,14 @@ public class Client extends BaseDynamicEntity {
         if(getPatience()<=0){
             isLeaving=true;
         }
-        //Checks if inspector is served on time and if not, set money to 0
+        //Checks if inspector is served on time and if not, half the money
 		if(sprite.equals(Images.people[9])) {
 			if(isLeaving) {
 				handler.getPlayer().money-=handler.getPlayer().money/2;
 				inspectorNotOnTime++;
-				if (inspectorNotOnTime>0) {
-					inspectorNotOnTime=1;
-				}
 			}
 		}
 		
-		
-		//Adding 12% patience to customers if inspector is served
-		if(handler.getPlayer().inspectorOnTime!=0 && runOnce==0) {
-				setPatience(getPatience()*1.12);	
-				runOnce=1;
-		}
 		
 		//As Anti-V's patience goes down every 8% they will lower another client that is in front or being(randomly) patience by 4%
         if(sprite.equals(Images.people[10])) {
@@ -137,9 +120,9 @@ public class Client extends BaseDynamicEntity {
             g.drawImage(Images.tint(sprite,1.0f,((float)getPatience()/(float)getOGpatience()),((float)getPatience()/(float)getOGpatience())),xPos,yPos,width,height,null);
 
             ((Burger) order.food).render(g);
-        } else if (runOnce1==0){
+        } else if (runOnce==0){
         	handler.getPlayer().setAmountThatLeft(handler.getPlayer().getAmountThatLeft()+1);
-        	runOnce1=1;
+        	runOnce=1;
         }
     }
 

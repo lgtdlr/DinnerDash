@@ -173,17 +173,21 @@ public class Player extends BaseDynamicEntity {
 			if (handler.getWorld().clients.get(selectClient).getOGpatience()/2 > handler.getWorld().clients.get(selectClient).getPatience())
 				money+=handler.getWorld().clients.get(selectClient).order.value*(1+0.15);
 			else money+=handler.getWorld().clients.get(selectClient).order.value;
+			
+			//Counting how many times the inspector was served on time
+			if(handler.getWorld().clients.get(selectClient).sprite.equals(Images.people[9]))
+						inspectorOnTime++;
+			
 			//Increase every client's patience when order is given exactly right
 			for (Client clients: handler.getWorld().clients) {
 				clients.setPatience(clients.getPatience() + clients.getOGpatience()/4);
-			}
-				//Counting how many times the inspector was served on time
-				for(Client client: handler.getWorld().clients) {
-					if(client.sprite.equals(Images.people[9]))
-						inspectorOnTime++;
+				
+				//Adding 12% patience to all customers if inspector is served
+				if(inspectorOnTime!=0) {
+						clients.setPatience(clients.getPatience()*1.12);	
 				}
-			
-			
+			}
+
 			//Moves all clients after the served client backwards
 			if (selectClient>0) {
 				for (int i = selectClient; i >= 0; i--) {
