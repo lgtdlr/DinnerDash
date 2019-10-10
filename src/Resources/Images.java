@@ -100,17 +100,17 @@ public class Images {
             chair = ImageIO.read(getClass().getResourceAsStream("/Sheets/chair.png"));
             table = ImageIO.read(getClass().getResourceAsStream("/Sheets/table.png"));
 
-            people[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Car_Designer3Female.png"));
-            people[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Doctor2Female.png"));
-            people[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Freedom_Fighter2Male.png"));
-            people[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Hipster.png"));
-            people[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Lawyer2Male.png"));
-            people[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Mad_Scientist3Female.png"));
-            people[6] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Programmer2Male.png"));
-            people[7] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Songwriter3Male.png"));
-            people[8] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Weather_Reporter2Female.png"));
-            people[9] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Inspector.png"));//Added inspector image
-            people[10] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Anti-V.png"));//Added Anti-V image
+            people[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/FemaleFish.png"));
+            people[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Fishredguy.png"));
+            people[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Fred.png"));
+            people[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Gilliam.png"));
+            people[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/HaroldBillRfd.png"));
+            people[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Jellyfish.png"));
+            people[6] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/MailMan.png"));
+            people[7] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Nocturna.png"));
+            people[8] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Prisoner.png"));
+            people[9] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/InspectorPatty.png"));//Added inspector image
+            people[10] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Flats_Anti-V.png"));//Added Anti-V image
 
             kitchenCounter[0] = kitchenCounterSpriteSheet.crop(224,12,32,43);//stoveTop
             kitchenCounter[1] = kitchenCounterSpriteSheet.crop(96,76,32,43);//Vegetables
