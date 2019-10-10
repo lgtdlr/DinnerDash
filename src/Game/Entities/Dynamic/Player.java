@@ -231,7 +231,7 @@ public class Player extends BaseDynamicEntity {
 		burger.render(g);
 		g.setColor(Color.green);
 		g.fillRect(handler.getWidth()/2 -210, 3, 320, 72);;
-		g.drawImage(Images.Karen,handler.getWidth()/2 -310, -50, 500, 200,null);
+		g.drawImage(Images.Karen,handler.getWidth()/2 -310, -50, 550, 200,null);
 		g.setColor(Color.yellow);
 		g.setFont(new Font("ComicSans", Font.BOLD, 32));
 		g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 35);
