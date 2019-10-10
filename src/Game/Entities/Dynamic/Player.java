@@ -245,6 +245,7 @@ public class Player extends BaseDynamicEntity {
 		//Visual indication of which client is selected
 		if ((handler.getWorld().clients.size()>0)) {
 			g.drawRect(handler.getWorld().clients.get(selectClient).xPos, handler.getWorld().clients.get(selectClient).yPos, 100, 100);
+			g.drawRect(handler.getWorld().clients.get(selectClient).xPos-1, handler.getWorld().clients.get(selectClient).yPos-1, 100+2, 100+2);
 
 		}
 	}
