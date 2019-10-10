@@ -1,19 +1,22 @@
 package Game.Entities.Dynamic;
 
-import Game.Entities.Static.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
+import java.util.Random;
+
+import Game.Entities.Static.BaseCounter;
+import Game.Entities.Static.Burger;
+import Game.Entities.Static.Item;
+import Game.Entities.Static.PlateCounter;
+import Game.Entities.Static.StoveCounter;
 import Game.GameStates.State;
-import Game.World.BaseWorld;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-import Resources.MusicHandler;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.util.Random;
-
-import org.w3c.dom.css.Counter;
 
 public class Player extends BaseDynamicEntity {
 	Item item;
@@ -234,7 +237,9 @@ public class Player extends BaseDynamicEntity {
 		g.drawImage(Images.Karen,handler.getWidth()/2 -310, -50, 550, 200,null);
 		g.setColor(Color.yellow);
 		g.setFont(new Font("ComicSans", Font.BOLD, 32));
-		g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 35);
+		//Printing money as two decimal points
+		DecimalFormat f = new DecimalFormat("##.00");
+		g.drawString("Money Earned: " + f.format(money), handler.getWidth()/2 -200, 35);
 		g.drawString("Clients Served: " + amountServed, handler.getWidth()/2 -200, 75);
 		
 		//Visual indication of which client is selected
