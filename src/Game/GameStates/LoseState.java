@@ -6,6 +6,7 @@ import Display.UI.UIImageButton;
 import Display.UI.UIManager;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 /**
  * Created by AlexVR on 7/1/2018.
@@ -65,7 +66,9 @@ public class LoseState extends State {
 		g.drawString("YOU LOSE.", handler.getWidth()/2+140, 110);
 		g.drawString("Clients served: " + handler.getPlayer().getAmountServed(), handler.getWidth()/2+80, 150);
 		g.drawString("Clients that left: " + handler.getPlayer().getAmountThatLeft(), handler.getWidth()/2+80, 190);
-		g.drawString("Money earned: " + handler.getPlayer().getMoney(), handler.getWidth()/2+80, 230);
+		//Printing money as two decimal points
+		DecimalFormat f = new DecimalFormat("##.00");
+		g.drawString("Money earned: " + f.format(handler.getPlayer().getMoney()), handler.getWidth()/2+80, 230);
 		g.drawImage(Images.overlayBox,0,620,870,200,null);
         uiManager.Render(g);
 
