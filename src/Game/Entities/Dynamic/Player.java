@@ -322,10 +322,12 @@ public class Player extends BaseDynamicEntity {
 	
 	private void increasePatience() {
 		handler.getWorld().clients.get(selectClient).setPatience(handler.getWorld().clients.get(selectClient).getPatience()+500);
+		handler.getWorld().clients.get(selectClient).setRunSlow(handler.getWorld().clients.get(selectClient).getRunSlow()-500);
 	}
 	
 	private void decreasePatience() {
 		handler.getWorld().clients.get(selectClient).setPatience(handler.getWorld().clients.get(selectClient).getPatience()-500);
+		handler.getWorld().clients.get(selectClient).setRunSlow(handler.getWorld().clients.get(selectClient).getRunSlow()+500);
 	}
 	
 }

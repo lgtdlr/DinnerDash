@@ -20,7 +20,7 @@ public class Client extends BaseDynamicEntity {
     private int runOnce;//To make condition run once in tick()
     public int inspectorNotOnTime=0;//Indicates how many inspectors did not get food on time
     private int posModifier;//Used for Anti-V affecting nearby clients
-    private int runSlow=0;//Used in tick() so the command runs once every second and avoids bugs
+    private double runSlow=0;//Used in tick() so the command runs once every second and avoids bugs
     
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
@@ -82,14 +82,16 @@ public class Client extends BaseDynamicEntity {
     }
 
     public void tick(){
-    	runSlow++;
+    	if(sprite.equals(Images.people[9])){
+    		runSlow++;
+    	}
         setPatience(getPatience() - 1);
         if(getPatience()<=0){
             isLeaving=true;
         }
         //Checks if inspector is served on time and if not, half the money
 		if(sprite.equals(Images.people[9])) {
-			if(isLeaving && runSlow >=1*60) {
+			if(isLeaving && runSlow >= OGpatience) {
 				handler.getPlayer().money-=handler.getPlayer().money/2;
 				inspectorNotOnTime++;
 				runSlow=0;
@@ -153,5 +155,13 @@ public class Client extends BaseDynamicEntity {
 
 	public void setOGpatience(double oGpatience) {
 		OGpatience = oGpatience;
+	}
+	
+	public void setRunSlow(double runSlow) {
+		this.runSlow = runSlow;
+	}
+	
+	public double getRunSlow() {
+		return runSlow;
 	}
 }
