@@ -20,7 +20,7 @@ public class Client extends BaseDynamicEntity {
     private int runOnce;//To make condition run once in tick()
     public int inspectorNotOnTime=0;//Indicates how many inspectors did not get food on time
     private int posModifier;//Used for Anti-V affecting nearby clients
-    private int runSlow=0;
+    private int runSlow=0;//Used in tick() so the command runs once every second and avoids bugs
     
     public Client(int xPos, int yPos, Handler handler) {
         super(Images.people[new Random().nextInt(11)], xPos, yPos,64,72, handler);
